@@ -1,4 +1,4 @@
-# ADR AI 01. Provider and Model Portability Through a Single Gateway
+# ADR-AI-001: Provider and Model Portability Through a Single Gateway
 
 ## Status
 Proposed

@@ -3,6 +3,9 @@
 ## Status
 Proposed
 
+## Related Documents
+- [C4 Diagrams: Animal Care Monitoring](c4-diagrams-animal-care-monitoring.md), covering this and the two ADRs that follow it in the pipeline ([004](004-adr-animal-feeding-and-health-learning-normal.md), [005](005-adr-animal-feeding-and-health-alerting.md)).
+
 ## Context
 - Feeding is currently recorded by hand, and how well an animal ate is just a keeper's impression. The brief wants what was offered and what was eaten at every feed across 55 enclosures, attributed to individuals wherever they can carry a tag.
 - Appetite loss is the earliest common sign of illness across species, so the feed bowl is the cheapest health instrument on the estate.

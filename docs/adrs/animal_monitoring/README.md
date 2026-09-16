@@ -49,6 +49,13 @@ The gateway, model selection, guardrails, evals, and production monitoring are e
 
 Retrieval isn't a separate feature here. It serves animal health at three points: proposing the species rhythm a vet signs off in [004](004-adr-animal-feeding-and-health-learning-normal.md), offering species context beside an alert card in [005](005-adr-animal-feeding-and-health-alerting.md), and answering a keeper's husbandry question.
 
+## Supporting documents
+
+| Document | What it covers |
+|---|---|
+| [C4 diagrams: Animal Care Monitoring](c4-diagrams-animal-care-monitoring.md) | System context, container, and two component-level deep-dives (where the model is called, how normal is learned and drift becomes an alert) for the measure/learn/alert pipeline (001-005, 008-009). |
+| [C4 diagrams: Piranha Population Count](c4-diagrams-piranha-population-count.md) | The same four C4 levels for the separate piranha counting pipeline (001, 005-007), which shares only the message bus, the hub, and the keeper app with animal care monitoring. |
+
 ## The through lines
 
 Four ideas recur across these records, and they're what makes this feel like a set rather than a list.

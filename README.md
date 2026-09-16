@@ -90,95 +90,7 @@ Her full ask, as we distilled it from the brief:
 
 ## 4. Master architecture view (C4 Container)
 
-```mermaid
-flowchart TB
-    Visitor(["Visitor / Family"])
-    Staff(["Keepers, Vets and Ops Staff"])
-    Countess(["72nd Countess (Owner)"])
-
-    subgraph EDGE["On-Estate Edge  -  patchy WiFi, MQTT store-and-forward"]
-        Turnstile["Turnstile / Access Gate<br/>offline signed-ticket check"]
-        Lookout["Lookout<br/>Edge AI nodes (CV)<br/>occupancy, welfare, safety, piranha"]
-        Anon["Edge Anonymiser<br/>faces never leave the estate"]
-        Sensors["Enclosure and Ride Telemetry<br/>feed, water, occupancy"]
-        Broker["MQTT Broker<br/>store-and-forward (QoS 1)"]
-        Ledger["Local Redemption Ledger"]
-    end
-
-    subgraph TX["TRANSACTIONAL PLANE  -  DETERMINISTIC (money and access)"]
-        Ticketing["Ticketing and Family Pass<br/>Ed25519 signed tickets"]
-        Access["Access Control"]
-        Payment["Payment"]
-        Pricing["Deterministic Pricing Engine"]
-        Identity["Visitor Identity and Consent"]
-        Audit["Decision and Audit Log<br/>immutable"]
-    end
-
-    Gate{{"DETERMINISTIC DECISION GATE<br/>the ONLY governed bridge"}}
-
-    subgraph ADV["ADVISORY PLANE  -  NON-DETERMINISTIC (all AI is advisory)"]
-        Augur["Augur<br/>Provider-agnostic LLM gateway<br/>routing, caching, fallback, budget"]
-        Guide["Guide<br/>Visitor concierge (GenAI)"]
-        Ark["Ark<br/>Animal welfare + piranha census"]
-        Footfall["Footfall and Popularity Analytics (ML)"]
-        Advisor["Profitability and Investment Advisor<br/>dynamic-pricing proposals"]
-        Eval["Eval and V and V Harness<br/>golden sets, drift, human feedback"]
-    end
-
-    Cloud[("Cloud LLM / ML Providers")]
-
-    %% Deterministic flows (solid)
-    Visitor -->|buy / pay| Payment
-    Payment --> Ticketing
-    Identity --> Ticketing
-    Ticketing --> Access
-    Visitor -->|present QR| Turnstile
-    Turnstile -->|signed QR verify| Ledger
-    Ledger --> Access
-    Access --> Audit
-    Ticketing --> Broker
-    Ledger -->|QoS1 sync| Broker
-    Gate -->|approved price change| Pricing
-    Pricing --> Ticketing
-    Gate -->|approved action| Access
-    Gate --> Audit
-
-    %% Edge into planes
-    Sensors --> Broker
-    Lookout --> Anon
-    Anon -.->|anonymised events| Broker
-    Broker -.->|advisory telemetry| Footfall
-    Broker -.->|welfare signals| Ark
-
-    %% Advisory flows (dotted)
-    Guide -.-> Augur
-    Advisor -.-> Augur
-    Ark -.-> Augur
-    Augur -.-> Cloud
-    Footfall -.->|staffing / hotspot proposals| Gate
-    Ark -.->|welfare + count-drift alerts| Gate
-    Advisor -.->|price / upsell / invest proposals| Gate
-    Guide -.->|answers, wayfinding| Visitor
-    Staff -.-> Guide
-    Countess -.-> Advisor
-
-    %% Eval taps everything
-    Augur -.-> Eval
-    Ark -.-> Eval
-    Footfall -.-> Eval
-    Advisor -.-> Eval
-    Staff -.->|confirm / correct| Eval
-
-    classDef gate fill:#c0392b,stroke:#7b241c,stroke-width:3px,color:#ffffff;
-    classDef tx fill:#d6eaf8,stroke:#2874a6,color:#000000;
-    classDef adv fill:#fdebd0,stroke:#ca6f1e,color:#000000;
-    classDef edge fill:#eafaf1,stroke:#1e8449,color:#000000;
-
-    class Gate gate;
-    class Ticketing,Access,Payment,Pricing,Identity,Audit tx;
-    class Augur,Guide,Ark,Footfall,Advisor,Eval adv;
-    class Turnstile,Lookout,Anon,Sensors,Broker,Ledger edge;
-```
+![Master architecture view: the whole estate as one system, transactional plane, advisory plane, and the deterministic decision gate between them](docs/diagrams/master-architecture.svg)
 
 ### Legend / Key
 
@@ -203,19 +115,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ### 5.1 Ticketing, family passes & access control
 
-```mermaid
-flowchart LR
-    V(["Visitor"]) -->|buy| TS["Ticketing<br/>Ed25519 sign"]
-    TS -->|signed ticket + QR| Wallet["Visitor Wallet / QR"]
-    Wallet -->|present| GateT["Turnstile<br/>offline verify"]
-    GateT -->|redeem once| Led["Local Redemption Ledger"]
-    Led -.->|QoS1 sync| Br["MQTT Broker"]
-    Br --> Central["Central Access Control"]
-    FP["Family Pass<br/>N-admit token"] --> GateT
-    Guide["Guide (GenAI)"] -.->|ticket help| V
-    classDef det fill:#d6eaf8,stroke:#2874a6;
-    class TS,GateT,Led,Central,FP det;
-```
+![Ticketing, family passes, and access control flow](docs/diagrams/ticketing.svg)
 
 **Solution (2–3 lines):** Tickets are **Ed25519-signed** so a turnstile can verify them **fully offline**; a **local redemption ledger** prevents double-entry when WiFi is down and reconciles via **MQTT QoS 1** on reconnect. Family passes are an **N-admit token** with a **distributed counter**, so a family of *N* can enter through any gate without a duplicate admit.
 **AI role:** deliberately **none in the money/access path** (it stays deterministic). AI appears only as **Guide**, a GenAI concierge that helps visitors *choose* the right ticket advisory, never transacting.
@@ -225,18 +125,7 @@ flowchart LR
 
 ### 5.2 Footfall & popularity analytics
 
-```mermaid
-flowchart LR
-    Cams["Lookout edge nodes<br/>occupancy CV"] --> Anon["Edge Anonymiser"]
-    Turns["Turnstile counts"] --> Br["MQTT Broker"]
-    Anon -.->|counts, no PII| Br
-    Br -.-> FA["Footfall Analytics (ML)"]
-    FA -.->|hotspot + staffing proposals| GateD{{"Decision Gate"}}
-    GateD -->|deterministic staffing / invest decision| Ops["Ops and Staffing"]
-    FA -.-> Eval["Eval Harness"]
-    classDef gate fill:#c0392b,stroke:#7b241c,color:#fff;
-    class GateD gate;
-```
+![Footfall and popularity analytics flow](docs/diagrams/footfall.svg)
 
 **Solution (2–3 lines):** Cheap edge nodes and turnstile counts produce **privacy-preserving occupancy counts** (identities stripped by the Anonymiser before anything leaves the enclosure). An **ML analytics** service turns the MQTT event stream into **popularity heatmaps and staffing/hotspot proposals**, which the estate acts on through the gate.
 **AI role:** ML pattern-detection over occupancy time-series → *proposals only*. Humans/ops own the staffing decision; every proposal is tapped into the Eval harness for drift.
@@ -245,19 +134,7 @@ flowchart LR
 ---
 
 ### 5.3 Animal welfare & piranha census (Ark)
-```mermaid
-flowchart LR
-    Feed["Feed and Water Sensors"] --> Br["MQTT Broker"]
-    CV["Lookout CV<br/>behaviour + piranha census"] -.-> Anon["Edge Anonymiser"]
-    Anon -.-> Br
-    Br -.-> Ark["Ark<br/>welfare models + population estimation"]
-    Ark -.->|welfare anomaly / count-drift alert| GateD{{"Decision Gate"}}
-    GateD -->|vet dispatch / restock work order| Keepers["Keepers and Vets"]
-    Ark -.->|plain-language welfare report| Augur["Augur"]
-    Keepers -.->|confirm / correct| Eval["Eval Harness"]
-    classDef gate fill:#c0392b,stroke:#7b241c,color:#fff;
-    class GateD gate;
-```
+![Animal welfare and piranha census (Ark) flow](docs/diagrams/animal-welfare.svg)
 
 **Solution (2–3 lines):** Across the **55 enclosures**, feed/water sensors and **Lookout CV** feed **Ark**, which runs welfare-anomaly models and for the jumping piranha, a **population-estimation** model that flags **count drift** (predation, breeding, escape). Alerts become **deterministic work orders** (vet dispatch, restock) only via the gate; **keepers confirm or correct**, feeding the eval loop.
 **AI role:** the richest AI surface: CV counting/behaviour, anomaly detection, and Augur-generated welfare summaries. **Human-in-the-loop** is mandatory before any welfare action, because both the AI *and* the animals are non-deterministic.
@@ -267,19 +144,7 @@ flowchart LR
 
 ### 5.4 Visitor growth & profitability
 
-```mermaid
-flowchart LR
-    Signals["Footfall + Revenue + Weather Signals"] -.-> Advisor["Profitability and Investment Advisor"]
-    Advisor -.-> Augur["Augur (LLM)"]
-    Advisor -.->|dynamic price / upsell / invest proposals| GateD{{"Decision Gate"}}
-    GateD -->|approved change| Pricing["Deterministic Pricing Engine"]
-    Pricing --> Ticketing2["Ticketing"]
-    Advisor -.-> Eval["Eval Harness"]
-    NoProfile["Refused: individualised / profiling-based pricing"]:::warn
-    classDef gate fill:#c0392b,stroke:#7b241c,color:#fff;
-    classDef warn fill:#fadbd8,stroke:#c0392b;
-    class GateD gate;
-```
+![Visitor growth and profitability flow](docs/diagrams/growth-profitability.svg)
 
 **Solution (2–3 lines):** A **Profitability & Investment Advisor** fuses footfall, revenue and context (season, weather, capacity) into **dynamic-pricing, upsell and investment proposals**. Prices only change through a **deterministic pricing engine** behind the gate, within pre-set floors/ceilings.
 **AI role:** ML + LLM reasoning to *propose* where to price, upsell and invest: the growth engine. **Individualised or profiling-based pricing is deliberately refused** (see ADRs below) on EU AI Act / Digital Fairness Act grounds: pricing varies by *segment/time/demand*, never by *who you are*.
@@ -300,18 +165,7 @@ flowchart LR
 
 ### 6.1 Augur: provider-agnostic LLM gateway (resilience zoom-in)
 
-```mermaid
-flowchart TB
-    Caller["Advisory services<br/>Guide, Ark, Advisor"] -.-> Router["Augur Router<br/>policy + routing"]
-    Router -.-> Cache["Semantic / Response Cache"]
-    Router -.-> Budget["Cost and Budget Guard"]
-    Router -.-> CB["Circuit Breaker + Rate Limit"]
-    CB -.-> P1["Provider A (primary)"]
-    CB -.-> P2["Provider B (fallback)"]
-    CB -.-> Local["Self-hosted model<br/>last resort"]
-    Router -.-> Obs["Metrics, tracing, eval taps"]
-    Obs -.-> Eval["Eval and V and V Harness"]
-```
+![Augur provider-agnostic LLM gateway resilience zoom-in](docs/diagrams/augur-resilience.svg)
 
 Augur is the single choke-point through which **every** LLM call passes. It gives us caching (cost + latency), a **budget guard** (hard spend ceilings), **circuit-breaking with fallback** across providers, and a **self-hosted last resort** so a provider price hike, outage, or shutdown becomes a *config change*, not a re-architecture. **ADR:** [docs/adrs/platform/ADR-AI-001](docs/adrs/platform/ADR-AI-001-provider-and-model-portability.md)
 
@@ -354,26 +208,62 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 ## 10. Architecture Decision Records (decision log)
 
 
+**Platform: architecture**
+
 | ID | Title | Status | Summary | Link |
 |---|---|---|---|---|
-| **ADR-004** (platform) | Architecture Style, Service-Based Core with Event-Driven Edge and CQRS | Accepted | A service-based transactional core, an event-driven MQTT edge, and CQRS read models for analytics. Fits a small ops team, scales 5k→15k/day, and cleanly separates write-side integrity from read-side popularity queries. | [docs/adrs/platform/ADR-004-architecture-style.md](docs/adrs/platform/ADR-004-architecture-style.md) |
-| **ADR-003** (platform) | The Two-Plane Safety Model, Deterministic Transactional vs Non-Deterministic Advisory | Accepted | Establishes the spine: money/access are deterministic; all AI is advisory; a single deterministic decision gate is the only bridge. Contains non-determinism by design. | [docs/adrs/platform/ADR-003-two-plane-safety-model.md](docs/adrs/platform/ADR-003-two-plane-safety-model.md) |
-| **ADR-001** (platform) | MQTT Store-and-Forward for Offline-First Edge Connectivity | Accepted | Chooses MQTT with QoS 1 store-and-forward so the estate keeps operating over patchy WiFi and reconciles on reconnect. Fits the funded hardware budget. | [docs/adrs/platform/ADR-001-store-and-forward-mqtt%20.md](docs/adrs/platform/ADR-001-store-and-forward-mqtt%20.md) |
+| **ADR-001** | MQTT Store-and-Forward for Offline-First Edge Connectivity | Accepted | Chooses MQTT with QoS 1 store-and-forward so the estate keeps operating over patchy WiFi and reconciles on reconnect. Fits the funded hardware budget. | [docs/adrs/platform/ADR-001-store-and-forward-mqtt%20.md](docs/adrs/platform/ADR-001-store-and-forward-mqtt%20.md) |
+| **ADR-002** | Asymmetric Cryptography for Offline-Verifiable Ticketing | Accepted | Ed25519 signing with the private key held only in cloud KMS, self-contained signed payloads verified offline at the turnstile, family passes as an N-admit token with a distributed counter, and a pre-signed voucher pool for offline gate sales. | [docs/adrs/platform/ADR-002-offline-ticket-signing.md](docs/adrs/platform/ADR-002-offline-ticket-signing.md) |
+| **ADR-003** | The Two-Plane Safety Model, Deterministic Transactional vs Non-Deterministic Advisory | Accepted | Establishes the spine: money/access are deterministic; all AI is advisory; a single deterministic decision gate is the only bridge. Contains non-determinism by design. | [docs/adrs/platform/ADR-003-two-plane-safety-model.md](docs/adrs/platform/ADR-003-two-plane-safety-model.md) |
+| **ADR-004** | Architecture Style, Service-Based Core with Event-Driven Edge and CQRS | Accepted | A service-based transactional core, an event-driven MQTT edge, and CQRS read models for analytics. Fits a small ops team, scales 5k→15k/day, and cleanly separates write-side integrity from read-side popularity queries. | [docs/adrs/platform/ADR-004-architecture-style.md](docs/adrs/platform/ADR-004-architecture-style.md) |
+| **ADR-005** | Edge-vs-Cloud Computer-Vision Inference Placement | Accepted | Latency/privacy/cost-sensitive CV (counting, safety) runs at the edge on Lookout; heavier/batch analysis runs in cloud. Anonymised data only leaves the estate. | [docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md](docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md) |
+| **ADR-006** | Edge Anonymiser, No Faces Leave the Estate | Accepted | Identity stripped at the edge before any event is published; privacy-by-design for footfall and welfare CV. EU AI Act aligned. | [docs/adrs/platform/ADR-006-edge-anonymiser.md](docs/adrs/platform/ADR-006-edge-anonymiser.md) |
+
+**Platform: the AI layer**
+
+| ID | Title | Status | Summary | Link |
+|---|---|---|---|---|
 | **ADR-AI-001** | Augur: A Provider-Agnostic LLM Gateway | Accepted | All LLM calls pass through Augur: routing, caching, budget guard, circuit-breaker, multi-provider fallback, self-hosted last resort. Directly answers AI-provider churn/pricing/shutdown. | [docs/adrs/platform/ADR-AI-001-provider-and-model-portability.md](docs/adrs/platform/ADR-AI-001-provider-and-model-portability.md) |
 | **ADR-AI-002** | Validation and Verification of AI Outputs Through Guardrails and Evals | Proposed | Deterministic guardrails run in code on every request; evals gate every versioned artefact (prompts, models, thresholds, indexes) before it ships. The pre-ship half of the V&V answer for non-deterministic AI. | [docs/adrs/platform/ADR-AI-002-validation-and-verification.md](docs/adrs/platform/ADR-AI-002-validation-and-verification.md) |
-| **ADR-001** (growth) | Hybrid ML+LLM Pricing and Investment Advisor Behind a Deterministic Gate | Accepted | Classical ML scores demand/opportunity, an LLM drafts the rationale, and only a deterministic pricing engine can change a live price, within pre-set floors/ceilings. | [docs/adrs/visitor_growth_profitability/001-adr-pricing-and-investment-advisor.md](docs/adrs/visitor_growth_profitability/001-adr-pricing-and-investment-advisor.md) |
-| **ADR-005** (platform) | Edge-vs-Cloud Computer-Vision Inference Placement | Accepted | Latency/privacy/cost-sensitive CV (counting, safety) runs at the edge on Lookout; heavier/batch analysis runs in cloud. Anonymised data only leaves the estate. | [docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md](docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md) |
-| **ADR-006** (platform) | Edge Anonymiser, No Faces Leave the Estate | Accepted | Identity stripped at the edge before any event is published; privacy-by-design for footfall and welfare CV. EU AI Act aligned. | [docs/adrs/platform/ADR-006-edge-anonymiser.md](docs/adrs/platform/ADR-006-edge-anonymiser.md) |
 | **ADR-AI-003** | Production Monitoring of AI Behaviour | Proposed | Every signal has a threshold, window, named responder, and response; hard signals (minutes) vs. statistical signals (7-14 days); canary prompts catch a silent provider model swap; one drilled fallback path plus a kill switch. | [docs/adrs/platform/ADR-AI-003-production-monitoring.md](docs/adrs/platform/ADR-AI-003-production-monitoring.md) |
-| **ADR-002** (platform) | Asymmetric Cryptography for Offline-Verifiable Ticketing | Accepted | Ed25519 signing with the private key held only in cloud KMS, self-contained signed payloads verified offline at the turnstile, family passes as an N-admit token with a distributed counter, and a pre-signed voucher pool for offline gate sales. | [docs/adrs/platform/ADR-002-offline-ticket-signing.md](docs/adrs/platform/ADR-002-offline-ticket-signing.md) |
-| **ADR-001** (ticketing) | Admissions as a Modular Monolith, Not Microservices | Accepted | One deployable over one database with enforced module boundaries, so a family-pass purchase, entitlement, and refund stay in a single transaction. | [docs/adrs/ticketing_and_access_control/001-adr-admissions-as-a-modular-monolith.md](docs/adrs/ticketing_and_access_control/001-adr-admissions-as-a-modular-monolith.md) |
-| **ADR-002** (ticketing) | Revocation as a Small, Time-Scoped Deny List | Accepted | A deny list scoped only to today's passes, with hard `revoked` and soft `superseded` (upgrade) classes, and a bounded staleness tolerance at the gate. | [docs/adrs/ticketing_and_access_control/002-adr-revocation-deny-list.md](docs/adrs/ticketing_and_access_control/002-adr-revocation-deny-list.md) |
-| **ADR-003** (ticketing) | Re-Entry Model and Gate Connectivity as Deliberate Investment | Accepted | Day tickets allow unlimited same-day re-entry with no consumed state; gates get real, funded connectivity so offline mode is the fallback, not the default. | [docs/adrs/ticketing_and_access_control/003-adr-reentry-and-gate-connectivity.md](docs/adrs/ticketing_and_access_control/003-adr-reentry-and-gate-connectivity.md) |
-| **ADR-002** (growth) | Refusal of Individualised and Profiling-Based Pricing | Accepted | Pricing varies by ticket type, time, and demand only; individual-level data is never given to the pricing path. Grounded in the EU AI Act and Digital Fairness Act. | [docs/adrs/visitor_growth_profitability/002-adr-refusal-of-individualised-pricing.md](docs/adrs/visitor_growth_profitability/002-adr-refusal-of-individualised-pricing.md) |
-| **ADR-003** (growth) | Consent-Gated Personalisation for Repeat Visits | Proposed | Return-visit recommendations run only on consented, approved signals, delivered through Guide, and are suppressible at any time. | [docs/adrs/visitor_growth_profitability/003-adr-consent-gated-personalisation.md](docs/adrs/visitor_growth_profitability/003-adr-consent-gated-personalisation.md) |
-| **ADR-004** (growth) | Growth Measured by Controlled Experiments, Not Correlation | Proposed | Every pricing/upsell/retention change states success criteria up front and gets a held-out comparison where possible; weaker before/after evidence is always labelled as such. | [docs/adrs/visitor_growth_profitability/004-adr-growth-measured-by-experiments.md](docs/adrs/visitor_growth_profitability/004-adr-growth-measured-by-experiments.md) |
-| **ADR-001/002** (footfall) | Footfall & Popularity Analytics via Privacy-Preserving Occupancy Sensing | Accepted | Beam/IR counters park-wide, CV added only in proven-dense zones, ML forecast, one read-only advisory agent; phased rollout gated on visitor volume. | [docs/adrs/footfall_and_popularity](docs/adrs/footfall_and_popularity) |
-| **ADR-001/003-007** (animal welfare) | Ark: Animal Welfare Monitoring & Piranha Population Estimation | Accepted/Proposed | Welfare-anomaly detection across 55 enclosures, edge vision for piranha counting, population reported as a fused range; alerts become deterministic work orders via the gate with mandatory human confirmation. | [docs/adrs/animal_monitoring](docs/adrs/animal_monitoring) |
+
+**Ticketing & access control**
+
+| ID | Title | Status | Summary | Link |
+|---|---|---|---|---|
+| **ADR-001** | Admissions as a Modular Monolith, Not Microservices | Accepted | One deployable over one database with enforced module boundaries, so a family-pass purchase, entitlement, and refund stay in a single transaction. | [docs/adrs/ticketing_and_access_control/001-adr-admissions-as-a-modular-monolith.md](docs/adrs/ticketing_and_access_control/001-adr-admissions-as-a-modular-monolith.md) |
+| **ADR-002** | Revocation as a Small, Time-Scoped Deny List | Accepted | A deny list scoped only to today's passes, with hard `revoked` and soft `superseded` (upgrade) classes, and a bounded staleness tolerance at the gate. | [docs/adrs/ticketing_and_access_control/002-adr-revocation-deny-list.md](docs/adrs/ticketing_and_access_control/002-adr-revocation-deny-list.md) |
+| **ADR-003** | Re-Entry Model and Gate Connectivity as Deliberate Investment | Accepted | Day tickets allow unlimited same-day re-entry with no consumed state; gates get real, funded connectivity so offline mode is the fallback, not the default. | [docs/adrs/ticketing_and_access_control/003-adr-reentry-and-gate-connectivity.md](docs/adrs/ticketing_and_access_control/003-adr-reentry-and-gate-connectivity.md) |
+
+**Visitor growth & profitability**
+
+| ID | Title | Status | Summary | Link |
+|---|---|---|---|---|
+| **ADR-001** | Hybrid ML+LLM Pricing and Investment Advisor Behind a Deterministic Gate | Accepted | Classical ML scores demand/opportunity, an LLM drafts the rationale, and only a deterministic pricing engine can change a live price, within pre-set floors/ceilings. | [docs/adrs/visitor_growth_profitability/001-adr-pricing-and-investment-advisor.md](docs/adrs/visitor_growth_profitability/001-adr-pricing-and-investment-advisor.md) |
+| **ADR-002** | Refusal of Individualised and Profiling-Based Pricing | Accepted | Pricing varies by ticket type, time, and demand only; individual-level data is never given to the pricing path. Grounded in the EU AI Act and Digital Fairness Act. | [docs/adrs/visitor_growth_profitability/002-adr-refusal-of-individualised-pricing.md](docs/adrs/visitor_growth_profitability/002-adr-refusal-of-individualised-pricing.md) |
+| **ADR-003** | Consent-Gated Personalisation for Repeat Visits | Proposed | Return-visit recommendations run only on consented, approved signals, delivered through Guide, and are suppressible at any time. | [docs/adrs/visitor_growth_profitability/003-adr-consent-gated-personalisation.md](docs/adrs/visitor_growth_profitability/003-adr-consent-gated-personalisation.md) |
+| **ADR-004** | Growth Measured by Controlled Experiments, Not Correlation | Proposed | Every pricing/upsell/retention change states success criteria up front and gets a held-out comparison where possible; weaker before/after evidence is always labelled as such. | [docs/adrs/visitor_growth_profitability/004-adr-growth-measured-by-experiments.md](docs/adrs/visitor_growth_profitability/004-adr-growth-measured-by-experiments.md) |
+
+**Footfall & popularity**
+
+| ID | Title | Status | Summary | Link |
+|---|---|---|---|---|
+| **ADR-001** | Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics | Accepted (Step 1) | Beam/IR counters park-wide as the default, CV added only in zones proven dense by the data, a lightweight forecast, and one read-only advisory Queue Management Agent behind an MCP server. | [docs/adrs/footfall_and_popularity/001-adr-crowd-and-popularity-analytics.md](docs/adrs/footfall_and_popularity/001-adr-crowd-and-popularity-analytics.md) |
+| **ADR-002** | Phased Rollout, Gated on Visitor Volume Not a Calendar Date | Accepted (Step 1) / Proposed (Step 2) / Roadmap (Step 3) | Three build phases, each gated on visitor volume rather than a calendar date: ground truth and platform interface, then cross-zone prediction, then platform reuse for pricing. | [docs/adrs/footfall_and_popularity/002-adr-phased-rollout-crowd-and-popularity-analytics.md](docs/adrs/footfall_and_popularity/002-adr-phased-rollout-crowd-and-popularity-analytics.md) |
+
+**Animal welfare & piranha population (Ark)**
+
+| ID | Title | Status | Summary | Link |
+|---|---|---|---|---|
+| **ADR-001** | Edge First, Event Driven Architecture with the Hub as System of Record | Proposed | One MQTT bus, append-only events, derived read models; the zone edge hub is the system of record, the cloud is a downstream consumer. | [docs/adrs/animal_monitoring/001-adr-edge-first-event-driven-architecture.md](docs/adrs/animal_monitoring/001-adr-edge-first-event-driven-architecture.md) |
+| **ADR-002** | LoRaWAN and Power over Ethernet for Sensors, Never WiFi | Proposed | Battery sensors on LoRaWAN, powered devices on Ethernet, WiFi reserved for visitors and staff. | [docs/adrs/animal_monitoring/002-adr-sensor-connectivity-lorawan-not-wifi.md](docs/adrs/animal_monitoring/002-adr-sensor-connectivity-lorawan-not-wifi.md) |
+| **ADR-003** | Feeding and Health, Step 1: Measuring Intake and Condition | Proposed | Non-invasive sensing layered per species, intake derived from a load cell, a quality gate and calibration register before any baseline. | [docs/adrs/animal_monitoring/003-adr-animal-feeding-and-health-measuring.md](docs/adrs/animal_monitoring/003-adr-animal-feeding-and-health-measuring.md) |
+| **ADR-004** | Feeding and Health, Step 2: Learning Normal and Spotting Drift | Proposed | Species rhythm proposed by retrieval and signed by a vet; normal learned per individual; plain rules first; persistence and corroboration before an alert fires. | [docs/adrs/animal_monitoring/004-adr-animal-feeding-and-health-learning-normal.md](docs/adrs/animal_monitoring/004-adr-animal-feeding-and-health-learning-normal.md) |
+| **ADR-005** | Feeding and Health, Step 3: Alerting a Keeper and Closing the Loop | Proposed | Three alert levels routed to a named owner, a verdict required to close, and a hard ceiling on alerts per shift. | [docs/adrs/animal_monitoring/005-adr-animal-feeding-and-health-alerting.md](docs/adrs/animal_monitoring/005-adr-animal-feeding-and-health-alerting.md) |
+| **ADR-006** | Edge Vision for the Piranha Count, and What It Actually Costs | Proposed | A small tuned model on a GPU box, one still per camera every 15 minutes, taking the maximum of a burst; the sampling rate is the real cost driver. | [docs/adrs/animal_monitoring/006-adr-edge-vision-for-piranha-counting.md](docs/adrs/animal_monitoring/006-adr-edge-vision-for-piranha-counting.md) |
+| **ADR-007** | Population Reported as a Range, Fused From Three Signals | Proposed | The population as a Bayesian posterior fused from the manual count, food per fish, and camera trend, always reported as a range with a direction. | [docs/adrs/animal_monitoring/007-adr-piranha-population-as-a-range.md](docs/adrs/animal_monitoring/007-adr-piranha-population-as-a-range.md) |
+| **ADR-008** | Retrieval Over a Curated, Provenance Tracked Corpus | Proposed | RAG over a closed, curated husbandry corpus with tracked provenance and mandatory citations; clinical questions are blocked. | [docs/adrs/animal_monitoring/008-adr-rag-over-a-curated-corpus.md](docs/adrs/animal_monitoring/008-adr-rag-over-a-curated-corpus.md) |
+| **ADR-009** | Retrieval Index Design, Chunking, Embeddings and Hybrid Search | Proposed | Structure-aware chunking, metadata filtering, hybrid keyword and dense search, and a small self-hosted store with a pinned embedding model. | [docs/adrs/animal_monitoring/009-adr-retrieval-index-design.md](docs/adrs/animal_monitoring/009-adr-retrieval-index-design.md) |
 
 ---
 

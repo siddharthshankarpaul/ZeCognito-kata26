@@ -59,39 +59,7 @@ This replaces "0.6" with a number derived from a documented procedure, once real
 
 ## 9. Mechanism Diagram
 
-```mermaid
-flowchart TD
-    Z["Zone-empty reconciliation<br/>occupancy hits zero overnight"] --> D[("Calibration dataset<br/>CV estimate vs. actual")]
-    MA["Periodic manual audit<br/>spot-checks dense-period footage"] --> D
-    D --> F["Per-zone calibration fit<br/>isotonic regression"]
-    F --> C["Calibrated confidence score<br/>feeds the live CV node"]
-    F --> T["Threshold tuning<br/>from a precision-recall curve"]
-    C --> G["CI eval gate<br/>gates any recalibration change"]
-    T --> G
-    G -.->|"approved change ships"| F
-
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef store fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef learn fill:#EEEDFE,stroke:#534AB7,color:#26215C;
-    classDef ship fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    classDef ev fill:#FAECE7,stroke:#993C1D,color:#4A1B0C;
-    class Z,MA det;
-    class D store;
-    class F,T learn;
-    class C ship;
-    class G ev;
-```
-
-| Symbol | Meaning |
-|---|---|
-| Gray | Ground-truth sourcing, deterministic/procedural. |
-| Blue cylinder | The labelled calibration dataset. |
-| Purple | The statistical fitting/tuning process. |
-| Pink | The calibrated artefact that actually ships to production. |
-| Coral | The governance gate any change must clear. |
-| Dashed | An approved change flowing back into the live calibration. |
-
-This diagram also appears as Level 3b in [c4-diagrams.md](c4-diagrams.md), the container-level view's targeted AI-subsystem deep-dive; it's repeated here so this note is readable standalone.
+The full mechanism diagram, with its symbol key, lives at [Level 3b in c4-diagrams.md](c4-diagrams.md#level-3b-component-confidence-calibration-mechanism), the container-level view's targeted AI-subsystem deep-dive. It isn't repeated here, this note stays the single place the procedure is specified in prose, and that diagram stays the single place it's drawn.
 
 ## 10. What This Resolves, and What It Doesn't
 

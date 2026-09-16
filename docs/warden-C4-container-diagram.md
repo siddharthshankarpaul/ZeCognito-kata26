@@ -9,7 +9,6 @@
 ## C4 Level 2 (Container)
 
 ```mermaid
-%%{init: {'flowchart': {'htmlLabels': true, 'nodeSpacing': 30, 'rankSpacing': 48, 'curve': 'basis'}, 'themeVariables': {'fontSize': '16px'}}}%%
 flowchart TB
   %% ============ PEOPLE ============
   VIS(["Visitor<br/>[Person]"]):::person

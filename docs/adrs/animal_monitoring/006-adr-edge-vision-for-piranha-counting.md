@@ -3,6 +3,9 @@
 ## Status
 Proposed
 
+## Related Documents
+- [C4 Diagrams: Piranha Population Count](c4-diagrams-piranha-population-count.md), covering this and [007](007-adr-piranha-population-as-a-range.md).
+
 ## Context
 - Piranhas can't be tagged or handled routinely, and fish are lost to aggression, illness, or escape. The brief wants a smoothed count several times a day, an alert on a meaningful drop, and a check against manual counts.
 - This is a safety matter as well as a welfare one. A piranha that leaves the tank is a public safety incident.

@@ -1,4 +1,4 @@
-# ADR AI 02. Validation and Verification of AI Outputs Through Guardrails and Evals
+# ADR-AI-002: Validation and Verification of AI Outputs Through Guardrails and Evals
 
 ## Status
 Proposed

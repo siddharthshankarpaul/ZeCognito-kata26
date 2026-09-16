@@ -67,7 +67,7 @@ flowchart LR
 
 ## Decision
 
-| Component | Decision |
+| Aspect | Decision |
 |---|---|
 | **Sensing** | Beam/IR counters park-wide as the default. CV is added only in zones proven dense by counting data, and it never streams raw frames, only a count, a density, and a confidence score. |
 | **Confidence handling** | Below the threshold (illustrative 0.6), the system automatically falls back to beam-counter-only. A low-confidence reading is never silently trusted. |
