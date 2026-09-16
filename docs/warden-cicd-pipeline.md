@@ -1,0 +1,33 @@
+# The Warden Platform: CI/CD Pipeline
+
+One pipeline, two lanes: deterministic services get a classic test pyramid; advisory/AI changes must clear an eval gate before they can influence the Decision Gate.
+
+---
+
+## Pipeline
+
+```mermaid
+flowchart LR
+    Dev["Commit (trunk-based)"] --> Build["Build + Unit Tests"]
+    Build --> Arch["Architecture Fitness Functions<br/>plane separation, contract tests"]
+    Arch --> Split{Change type?}
+    Split -->|Deterministic service| PyrTest["Test pyramid<br/>integration + e2e"]
+    Split -->|Advisory / AI| EvalGate["Golden-set eval gate<br/>+ drift check"]
+    PyrTest --> Stage["Staging"]
+    EvalGate --> Shadow["Shadow / Canary<br/>+ human sign-off"]
+    Stage --> Prod["Deploy"]
+    Shadow --> Prod
+    Prod --> Edge["Staged OTA to MQTT edge nodes"]
+    Prod --> Monitor["Prod eval + drift monitoring"]
+```
+
+---
+
+## Two lanes, one pipeline
+
+- **Deterministic services** follow a classic test pyramid, plus **architecture fitness functions** that *fail the build* if the two-plane separation is violated (e.g. an AI service reaching the transactional plane without going through the gate).
+- **Advisory / AI changes** must pass **golden-dataset eval gates** and **drift checks**, then go through **shadow/canary with human sign-off** before they can influence the decision gate.
+- **Model/provider swaps** are Augur **configuration changes** validated by evals, not application redeploys.
+- **Edge deployment** is staged **OTA to MQTT devices**; production is continuously watched by the same eval harness that gated it.
+
+<p align="right"><a href="../README.md">↑ Back to README</a></p>
