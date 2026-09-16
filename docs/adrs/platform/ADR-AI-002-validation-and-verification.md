@@ -3,6 +3,8 @@
 ## Status
 Proposed
 
+**MLOps framing:** this is the estate's model/prompt promotion gate, deciding what's safe to ship before it reaches a keeper or a guest. What happens once an artefact is live is [ADR-AI-003](ADR-AI-003-production-monitoring.md)'s job.
+
 ## Date
 16 September 2026
 

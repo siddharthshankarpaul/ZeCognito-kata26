@@ -218,6 +218,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 | **ADR-004** | Architecture Style, Service-Based Core with Event-Driven Edge and CQRS | Accepted | A service-based transactional core, an event-driven MQTT edge, and CQRS read models for analytics. Fits a small ops team, scales 5k→15k/day, and cleanly separates write-side integrity from read-side popularity queries. | [docs/adrs/platform/ADR-004-architecture-style.md](docs/adrs/platform/ADR-004-architecture-style.md) |
 | **ADR-005** | Edge-vs-Cloud Computer-Vision Inference Placement | Accepted | Latency/privacy/cost-sensitive CV (counting, safety) runs at the edge on Lookout; heavier/batch analysis runs in cloud. Anonymised data only leaves the estate. | [docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md](docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md) |
 | **ADR-006** | Edge Anonymiser, No Faces Leave the Estate | Accepted | Identity stripped at the edge before any event is published; privacy-by-design for footfall and welfare CV. EU AI Act aligned. | [docs/adrs/platform/ADR-006-edge-anonymiser.md](docs/adrs/platform/ADR-006-edge-anonymiser.md) |
+| **ADR-007** | Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx | Proposed | Illustrative CapEx/OpEx breakdown for the edge hardware and AI OpEx above; pushes spend into one-time capital at the edge and keeps LLM gateway spend on one visible line. | [docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md](docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md) |
 
 **Platform: the AI layer**
 
@@ -299,7 +300,7 @@ One pipeline, two lanes: deterministic services get a classic test pyramid, whil
 | Grow visitors + profitability | Innovative AI use; suitability | §5.4 |
 | Patchy WiFi / offline | Suitability under constraints | §2, §5.1, §11 |
 | Estate → cloud data movement | Suitability | §4, §11 |
-| MQTT hardware budget | Suitability; cost | §4, §11 |
+| MQTT hardware budget | Suitability; cost | §4, §10, §11 |
 | **Dealing with AI-provider uncertainty** | Uncertainty in AI | §6.1, §8 |
 | **Do additions match existing characteristics?** | Characteristics fit | §3.1, §2 |
 | **Validation of non-deterministic AI results** | Validation & verification | §7 |

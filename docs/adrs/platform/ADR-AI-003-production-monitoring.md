@@ -3,6 +3,8 @@
 ## Status
 Proposed
 
+**AIOps framing:** this is the estate's production monitoring and incident-response layer for AI once it's live, canaries, drift, drills, and the kill switch. Deciding what's safe to promote in the first place is [ADR-AI-002](ADR-AI-002-validation-and-verification.md)'s job.
+
 ## Date
 16 September 2026
 

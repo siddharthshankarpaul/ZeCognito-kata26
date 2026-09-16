@@ -22,8 +22,11 @@ The brief asks for trade-off analysis, so the Alternatives and Consequences sect
 | [ADR-004](ADR-004-architecture-style.md) | A service-based transactional core, an event-driven MQTT edge, and CQRS read models, not a microservices mesh. | Eventually-consistent read models and a bet against outgrowing 15k/day sooner than planned, in exchange for an architecture a small team can actually run. |
 | [ADR-005](ADR-005-edge-vs-cloud-cv-placement.md) | Latency/privacy/cost-sensitive computer vision (counting, safety) runs on the edge; heavier batch analysis runs in the cloud on already-anonymised data. | Per-deployment edge hardware and tuning cost, in exchange for counting and safety signals that work with no network dependency. |
 | [ADR-006](ADR-006-edge-anonymiser.md) | Identity is stripped from every camera frame at the edge, on-device, before anything is published. | Compute cost on every camera deployment, in exchange for no raw or identifiable frame ever leaving the estate. |
+| [ADR-007](ADR-007-cost-model-and-investment-strategy.md) | Push spend into one-time CapEx at the edge wherever it removes a recurring cloud bill; keep AI OpEx on one visible, tiered line through Augur. | Capital paid up front, before 3x growth shows up in revenue, in exchange for a cost structure that doesn't surprise Finance mid-month. |
 
 ### The AI layer
+
+Together, [ADR-AI-002](ADR-AI-002-validation-and-verification.md) and [ADR-AI-003](ADR-AI-003-production-monitoring.md) are this platform's MLOps (what's safe to ship) and AIOps (what's safe to keep running) layers; they just aren't named that anywhere else in this repo.
 
 | Number | Decision | The tradeoff |
 |---|---|---|
