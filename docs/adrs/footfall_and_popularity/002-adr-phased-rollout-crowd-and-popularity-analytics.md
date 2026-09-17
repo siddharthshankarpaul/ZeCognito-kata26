@@ -20,34 +20,7 @@ Each step's gate is the estate's own visitor-volume curve, not a calendar date.
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph p1["Step 1, now · ~5,000/day"]
-        direction TB
-        S1["Beam + CV counters"]
-        S2["Per-zone forecast"]
-        S3["Queue agent + MCP server"]
-    end
-    subgraph p2["Step 2, required next · ~8,000-10,000/day"]
-        direction TB
-        T1["Transition graph<br/>learned from ticket scans"]
-        T2["simulate_scenario tool<br/>added to the same MCP server"]
-    end
-    subgraph p3["Step 3, roadmap · ~12,000-15,000/day"]
-        direction TB
-        U1["Stereo-vision upgrade<br/>where crush density proven"]
-        U2["Twin reused by Pricing via MCP"]
-    end
-
-    p1 --> p2 --> p3
-
-    classDef done fill:#EAF3DE,stroke:#3B6D11,color:#173404;
-    classDef next fill:#EEEDFE,stroke:#534AB7,color:#26215C;
-    classDef later fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    class S1,S2,S3 done;
-    class T1,T2 next;
-    class U1,U2 later;
-```
+![ADR-002: Phased Rollout, Gated on Visitor Volume Not a Calendar Date](../../diagrams/adr-related/footfall-adr-002-phased-rollout.svg)
 
 | Symbol | Meaning |
 |---|---|

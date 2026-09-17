@@ -26,28 +26,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph EDGE["On-estate, Lookout GPU boxes"]
-        direction TB
-        CAM["Camera"]
-        MODEL["Small, tuned model<br/>counting / occupancy"]
-        CAM --> MODEL
-    end
-
-    NUM["Derived numbers only<br/>count, density, confidence"]
-    CLOUD["Cloud: batch analysis,<br/>retraining, trend reports"]
-
-    MODEL --> NUM
-    NUM -->|"anonymised data only"| CLOUD
-
-    classDef edge fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef cloud fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef out fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class CAM,MODEL edge;
-    class CLOUD cloud;
-    class NUM out;
-```
+![ADR-005: Edge-vs-Cloud Computer-Vision Inference Placement](../../diagrams/adr-related/platform-adr-005-edge-vs-cloud-cv-placement.svg)
 
 | Symbol | Meaning |
 |---|---|

@@ -40,37 +40,7 @@ Three things worth saying plainly. Cloud inference at 15-minute sampling wouldn'
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph house["Piranha house, on the estate"]
-        direction TB
-        C1["PoE camera 1<br/>polarising and infrared<br/>fixed mount"]
-        C2["PoE camera 2"]
-        PRE["Preprocess in code<br/>crop, deglare<br/>discard frames with keeper or net"]
-        MOD["Counting model on GPU box<br/>detector if spread, density map if tight<br/>tuned on 500 to 1000 frames"]
-        BURST["Burst: take the maximum<br/>occlusion only hides fish"]
-        SM["Higher of two cameras<br/>then median of last two hours"]
-        C1 -->|"one still every 15 min"| PRE
-        C2 -->|"one still every 15 min"| PRE
-        PRE --> MOD --> BURST --> SM
-    end
-
-    SPL["Splash sensor<br/>surface break outside feeding"]
-    OUT["Smoothed count and confidence<br/>only numbers leave"]
-    EST["Population estimate"]
-    LBL["Sampled frames<br/>annotation only"]
-
-    SM --> OUT --> EST
-    SPL ==>|"safety, top priority"| EST
-    PRE -.->|"lowest priority, wired link only"| LBL
-
-    classDef local fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    class house local;
-    classDef key fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class BURST,OUT key;
-    classDef safety fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class SPL safety;
-```
+![ADR-006: Edge Vision for the Piranha Count, and What It Actually Costs](../../diagrams/adr-related/animal-monitoring-adr-006-edge-vision-for-piranha-counting.svg)
 
 | Symbol | Meaning |
 |---|---|

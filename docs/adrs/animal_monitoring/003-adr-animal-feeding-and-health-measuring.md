@@ -30,35 +30,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    subgraph layers["Sensing layers, chosen per species"]
-        direction TB
-        L1["Everywhere<br/>environment nodes, feeding data"]
-        L2["Taggable<br/>RFID and weigh pads"]
-        L3["Large mammals<br/>wearable activity tags"]
-        L4["Venomous and untaggable<br/>cameras at feed, den, water"]
-    end
-
-    HAND["Hand fed meals<br/>logged in the keeper app"]
-    QG["Quality gate at the hub<br/>range, rate of change, timestamp<br/>failures quarantined and counted"]
-    CAL["Calibration register<br/>overdue means degraded"]
-    DERIVE["Derivation on the hub<br/>dispensed minus leftover<br/>mass curve gives time to finish"]
-    ATTR{"Tag at the bowl?"}
-    SERIES["Daily intake series<br/>carrying its attribution level"]
-
-    layers --> QG
-    CAL -.->|"degraded readings may alert<br/>but never update a baseline"| QG
-    QG --> DERIVE --> ATTR
-    ATTR -->|"yes, individual"| SERIES
-    ATTR -->|"no, enclosure"| SERIES
-    HAND --> SERIES
-
-    classDef cheap fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class L1 cheap;
-    class QG,CAL,ATTR gate;
-```
+![ADR-003: Feeding and Health, Step 1. Measuring Intake and Condition](../../diagrams/adr-related/animal-monitoring-adr-003-feeding-and-health-measuring.svg)
 
 | Symbol | Meaning |
 |---|---|

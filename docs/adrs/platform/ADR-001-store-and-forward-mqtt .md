@@ -24,30 +24,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph onprem["On-prem · Edge patchy WiFi"]
-        direction TB
-        G["Gate scanner<br/>validates ticket offline, &lt;1s"]
-        B["Local buffer<br/>store-and-forward on disk<br/>holds events during outage"]
-        G --> B
-    end
-
-    subgraph cloud["Cloud"]
-        direction TB
-        CB["Cloud MQTT broker"]
-        R["Reconciliation<br/>de-duplicates on event ID"]
-        RM["Read models<br/>dashboards · revenue · alerts"]
-        CB --> R --> RM
-    end
-
-    B ==>|"flush on reconnect · QoS 1 (at-least-once)"| CB
-
-    classDef buf fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class B buf;
-    style onprem fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-    style cloud fill:#E6F1FB,stroke:#185FA5,color:#042C53
-```
+![ADR-001: Store-and-Forward MQTT as the Edge-to-Cloud Contract](../../diagrams/adr-related/platform-adr-001-store-and-forward-mqtt.svg)
 
 | Symbol | Meaning |
 |---|---|

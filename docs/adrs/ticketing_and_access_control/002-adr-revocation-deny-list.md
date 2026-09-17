@@ -22,38 +22,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    REFUND["Refund / loss / fraud"]
-    UPGRADE["Upgrade / amendment"]
-    TXN["Admissions transaction<br/>ADR-001"]
-    LIST[("Deny list<br/>today's passes only")]
-    GATE["Turnstile / kiosk"]
-    CHECK{"On deny list?"}
-    ADMIT["Admit"]
-    DENY["Deny"]
-    STALE{"List refreshed<br/>within window?"}
-    FLAG["Admit, tagged<br/>unverified-revocation<br/>logged for review"]
-
-    REFUND --> TXN -->|"revoked"| LIST
-    UPGRADE --> TXN -->|"superseded"| LIST
-    LIST -->|"refresh, while online"| GATE
-    GATE --> CHECK
-    CHECK -->|"revoked"| DENY
-    CHECK -->|"superseded"| ADMIT
-    CHECK -->|"not listed"| ADMIT
-    GATE --> STALE
-    STALE -->|"no"| FLAG
-
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef store fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef block fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class TXN,GATE det;
-    class LIST store;
-    class CHECK,STALE gate;
-    class DENY block;
-```
+![ADR-002: Revocation as a Small, Time-Scoped Deny List](../../diagrams/adr-related/ticketing-adr-002-revocation-deny-list.svg)
 
 | Symbol | Meaning |
 |---|---|

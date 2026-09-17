@@ -24,35 +24,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    KMS[("Cloud KMS<br/>Ed25519 private key")]
-    TS["Ticketing service<br/>signs tickets and vouchers"]
-    APP["Visitor app / website"]
-    POOL["Pre-signed voucher pool<br/>provisioned while online"]
-    KIOSK["Gate kiosk<br/>public key only"]
-    GATE["Turnstile<br/>public key only"]
-    LEDGER["Local redemption ledger"]
-    BROKER["MQTT broker<br/>store-and-forward, QoS 1"]
-
-    KMS --> TS
-    APP -->|"buy"| TS
-    TS -->|"signed ticket"| APP
-    TS -.->|"replenish, while online"| POOL
-    POOL -.-> KIOSK
-    KIOSK -->|"offline sale, issue voucher"| GATE
-    APP -->|"present QR"| GATE
-    GATE -->|"verify with public key, no network needed"| LEDGER
-    LEDGER -->|"QoS1 sync on reconnect"| BROKER
-    BROKER -->|"redemption + sale reconciliation"| TS
-
-    classDef secure fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    classDef edge fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    class KMS secure;
-    class KIOSK,GATE,POOL edge;
-    class TS,LEDGER,BROKER det;
-```
+![ADR-002: Asymmetric Cryptography for Offline-Verifiable Ticketing](../../diagrams/adr-related/platform-adr-002-offline-ticket-signing.svg)
 
 | Symbol | Meaning |
 |---|---|

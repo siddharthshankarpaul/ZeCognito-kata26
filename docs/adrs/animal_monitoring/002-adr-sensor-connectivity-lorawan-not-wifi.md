@@ -24,45 +24,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph batt["Battery, low rate, LoRaWAN"]
-        direction TB
-        E["Environment node<br/>temp, humidity, light"]
-        W["Water probe<br/>temp, pH, oxygen"]
-        SP["Splash sensor<br/>event only"]
-    end
-
-    subgraph mains["Mains or PoE, Ethernet"]
-        direction TB
-        F["Feeder and load cell"]
-        RF["RFID and weigh pad"]
-        C["Camera<br/>local vision route"]
-    end
-
-    subgraph tags["Short range radio"]
-        T["Wearable activity tag"]
-        EG["Enclosure gateway"]
-        T --> EG
-    end
-
-    GW["LoRaWAN gateways<br/>every sensor heard by two<br/>buffers if hub unreachable"]
-    HUB["Zone edge hub"]
-
-    batt -->|"radio"| GW
-    GW -->|"Ethernet, 4G fallback"| HUB
-    mains -->|"cable"| HUB
-    EG --> GW
-
-    WIFI["WiFi"]
-    WIFI -.->|"not used for telemetry"| HUB
-
-    classDef no fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class WIFI no;
-    style batt fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-    style mains fill:#E6F1FB,stroke:#185FA5,color:#042C53
-    style tags fill:#F5EEFB,stroke:#5B3B8C,color:#2C1A4A
-```
+![ADR-002: LoRaWAN and Power over Ethernet for Sensors, Never WiFi](../../diagrams/adr-related/animal-monitoring-adr-002-sensor-connectivity-lorawan-not-wifi.svg)
 
 | Symbol | Meaning |
 |---|---|

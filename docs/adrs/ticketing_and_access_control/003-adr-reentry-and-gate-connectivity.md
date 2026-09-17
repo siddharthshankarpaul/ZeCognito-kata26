@@ -21,33 +21,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    DAY["Day ticket, scanned"]
-    CHECK["Signature valid?<br/>Within validity window?<br/>Not on deny list?"]
-    ADMIT["Admit<br/>no consumed state recorded"]
-    VOUCHER["Offline voucher / single-use product"]
-    LEDGER["Local redemption ledger<br/>platform/ADR-002"]
-
-    NORMAL["Normal operation<br/>gate wired, deny list seconds old"]
-    OUTAGE["Actual outage<br/>fallback to full offline mode"]
-
-    DAY --> CHECK --> ADMIT
-    VOUCHER --> LEDGER
-
-    NORMAL -.->|"degrades to"| OUTAGE
-
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef store fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef normal fill:#EAF3DE,stroke:#3B6D11,color:#173404;
-    classDef fallback fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    class CHECK gate;
-    class ADMIT det;
-    class LEDGER store;
-    class NORMAL normal;
-    class OUTAGE fallback;
-```
+![ADR-003: Re-Entry Model and Gate Connectivity as Deliberate Investment](../../diagrams/adr-related/ticketing-adr-003-reentry-and-gate-connectivity.svg)
 
 | Symbol | Meaning |
 |---|---|

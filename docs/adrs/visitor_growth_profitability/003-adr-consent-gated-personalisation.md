@@ -23,30 +23,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    CONSENT{"Valid, current consent?"}
-    HIST["Ticket-scan history<br/>local redemption ledger"]
-    PREF["Stated preferences<br/>given to Guide"]
-    REC["Recommendation / return-visit nudge"]
-    GUIDE["Guide (GenAI concierge)"]
-    VISITOR["Visitor"]
-    NONE["No personalisation, no contact"]
-    OPTOUT["Dismiss / mute / withdraw"]
-
-    HIST --> CONSENT
-    PREF --> CONSENT
-    CONSENT -->|"yes"| REC --> GUIDE --> VISITOR
-    CONSENT -->|"no"| NONE
-    VISITOR -.->|"any time"| OPTOUT -.->|"takes effect immediately"| CONSENT
-
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef ai fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    classDef block fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class CONSENT gate;
-    class REC,GUIDE ai;
-    class NONE block;
-```
+![ADR-003: Consent-Gated Personalisation for Repeat Visits](../../diagrams/adr-related/growth-adr-003-consent-gated-personalisation.svg)
 
 | Symbol | Meaning |
 |---|---|

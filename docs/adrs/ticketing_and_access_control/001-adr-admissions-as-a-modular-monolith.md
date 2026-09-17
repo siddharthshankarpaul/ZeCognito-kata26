@@ -21,37 +21,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    subgraph MONOLITH["Admissions, one deployable"]
-        direction TB
-        CAT["Catalogue"]
-        ORD["Orders"]
-        PASS["Passes"]
-        ENT["Entitlements<br/>N-admit counters"]
-        REF["Refunds & amendments"]
-        DB[("One relational database")]
-        CAT --- DB
-        ORD --- DB
-        PASS --- DB
-        ENT --- DB
-        REF --- DB
-    end
-
-    PAY["External payment provider"]
-    SIGN["Signing path<br/>platform/ADR-002"]
-    GATE["Turnstile / kiosk"]
-
-    ORD -->|"payment reference only"| PAY
-    PASS --> SIGN --> GATE
-
-    classDef mod fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef store fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef ext fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class CAT,ORD,PASS,ENT,REF mod;
-    class DB store;
-    class PAY,SIGN,GATE ext;
-```
+![ADR-001: Admissions as a Modular Monolith, Not Microservices](../../diagrams/adr-related/ticketing-adr-001-admissions-as-a-modular-monolith.svg)
 
 | Symbol | Meaning |
 |---|---|

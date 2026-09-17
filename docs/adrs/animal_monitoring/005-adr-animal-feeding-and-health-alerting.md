@@ -31,49 +31,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    SIG["Signal fires, with persistence<br/>and corroboration already applied"]
-    LEVEL{"Level"}
-    REV["Review<br/>keeper app"]
-    ACT["Act<br/>app plus SMS"]
-    URG["Urgent<br/>app, SMS, vet, ops board"]
-
-    CARD["Alert card<br/>one plain sentence, the chart,<br/>facts cited, no condition named"]
-    CTX["Species context, optional<br/>retrieved from the curated corpus<br/>cited and dated, husbandry only"]
-    OWNER["Named owner<br/>section keeper on shift"]
-    VERD{"Verdict, required<br/>looks fine, concern,<br/>escalate to vet"}
-    CLOSED["Alert closed"]
-
-    subgraph loop["What the verdict pays for"]
-        direction TB
-        TH["Per enclosure thresholds"]
-        BL["Baselines"]
-        PREC["Precision against the 70 per cent target<br/>and alerts per keeper per shift"]
-        EV["Eval sets"]
-    end
-
-    SIG --> LEVEL
-    LEVEL --> REV --> CARD
-    LEVEL --> ACT --> CARD
-    LEVEL --> URG --> CARD
-    CTX -.->|"shown beside the card,<br/>never mixed with the animal's data"| CARD
-    CARD --> OWNER --> VERD
-    VERD -->|"looks fine or concern"| CLOSED
-    VERD -->|"escalate, vet examines"| CLOSED
-    CLOSED --> TH
-    CLOSED --> BL
-    CLOSED --> PREC
-    CLOSED --> EV
-    PREC -.->|"ceiling breached means a threshold<br/>review, not a busier shift"| TH
-
-    classDef urgent fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef out fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    class URG,ACT urgent;
-    class VERD,LEVEL gate;
-    class TH,BL,PREC,EV out;
-```
+![ADR-005: Feeding and Health, Step 3. Alerting a Keeper and Closing the Loop](../../diagrams/adr-related/animal-monitoring-adr-005-feeding-and-health-alerting.svg)
 
 | Symbol | Meaning |
 |---|---|

@@ -23,39 +23,7 @@
 
 ## Diagram: System View
 
-```mermaid
-flowchart LR
-    subgraph telemetry["Deterministic telemetry"]
-        direction TB
-        IR["Beam/IR counters<br/>park-wide default"]
-        CV["CV edge nodes<br/>proven-dense zones only"]
-    end
-
-    RM["Read models · CQRS<br/>occupancy · dwell · forecast"]
-    API["REST / GraphQL API<br/>for software clients"]
-    MCP["Crowd analytics MCP server<br/>read-only, access-controlled tools"]
-    AGENT["Queue management agent<br/>advisory only, calls MCP tools"]
-    OPS["Ops review<br/>human decision"]
-    ACT["Deterministic action<br/>staffing, budget"]
-    EVAL["Shared CI eval gate"]
-
-    IR --> RM
-    CV --> RM
-    RM --> API
-    RM --> MCP
-    MCP --> AGENT
-    AGENT -->|"recommendation + reason"| OPS
-    OPS ==>|"the only path to money/action"| ACT
-    OPS -.->|"outcome logged"| EVAL
-    EVAL -.->|"improves"| AGENT
-
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef ai fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    classDef ev fill:#FAECE7,stroke:#993C1D,color:#4A1B0C;
-    class IR,CV,RM,API,MCP,OPS,ACT det;
-    class AGENT ai;
-    class EVAL ev;
-```
+![ADR-001: Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics — System View](../../diagrams/adr-related/footfall-adr-001-crowd-and-popularity-analytics-system-view.svg)
 
 | Symbol | Meaning |
 |---|---|
@@ -78,27 +46,7 @@ flowchart LR
 
 ## Diagram: Decision Flow
 
-```mermaid
-flowchart TD
-    A["Zone boundary crossing<br/>in / out event"] --> B["Ingestion & validator<br/>schema check, dedupe"]
-    B --> C["Reconciliation engine<br/>occupancy = Σin − Σout"]
-    C --> D{"CV reading present<br/>and confidence ≥ 0.6?"}
-    D -- "yes" --> E["Occupancy = CV-enriched"]
-    D -- "no" --> F["Occupancy = beam-counter only"]
-    E --> G["Read model store<br/>occupancy_view · dwell_view"]
-    F --> G
-    G --> H["Forecast service<br/>beats naive baseline first"]
-    H --> M["MCP server<br/>read-only tool call"]
-    M --> I["Queue management agent"]
-    I --> J["Ops review"]
-
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef ai fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    class A,B,C,E,F,G,J,M det;
-    class D gate;
-    class H,I ai;
-```
+![ADR-001: Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics — Decision Flow](../../diagrams/adr-related/footfall-adr-001-crowd-and-popularity-analytics-decision-flow.svg)
 
 | Symbol | Meaning |
 |---|---|

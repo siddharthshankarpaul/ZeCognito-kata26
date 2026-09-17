@@ -48,33 +48,7 @@ Only the comparative eval gate waits for volume. Guardrails work from the very f
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    IN["Request"] --> PRE["Before the model<br/>facts bundle only, PII stripped,<br/>content as data, tool template checked"]
-    PRE --> BLK{"Blocked question class?"}
-    BLK -->|"yes"| HB["No model call<br/>protocol, duty vet, or named human"]
-    BLK -->|"no"| M["Model"] --> POST["After the model<br/>schema, citations resolve, numbers match,<br/>blocklist clean, facts trace to a tool call"]
-    POST -->|"passes"| OUT["Delivered to a person"]
-    POST -->|"fails twice"| DEG["Fallback with no model"]
-
-    CH["Change to a prompt, model, route,<br/>index, threshold or tool tier"] --> G["Seven blocking layers<br/>ending in red team at zero tolerance"]
-    G --> BAND{"No worse than live,<br/>inside the tolerance band?"}
-    BAND -->|"yes"| SHIP["Promoted"]
-    BAND -->|"no"| STOP["Blocked"]
-
-    SETS["Eval sets<br/>operations plus a random slice"] --> BAND
-    COLD["Cold start stand in<br/>red team, synthetic set, shadow"] -.->|"until the set is big enough"| BAND
-    OUT -.->|"human decisions feed back"| SETS
-
-    classDef code fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef block fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    classDef fb fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef cold fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    class PRE,POST code;
-    class HB,STOP block;
-    class DEG,BAND fb;
-    class COLD cold;
-```
+![ADR-AI-002: Validation and Verification of AI Outputs Through Guardrails and Evals](../../diagrams/adr-related/platform-adr-ai-002-validation-and-verification.svg)
 
 | Symbol | Meaning |
 |---|---|

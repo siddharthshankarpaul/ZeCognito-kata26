@@ -38,32 +38,7 @@ Passing an eval tells you how the system behaved on that day. Six weeks later th
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    SRC["Signals from data we already have<br/>per call log, human decisions,<br/>ground truth, provider canary"]
-
-    SRC --> HARD["Hard signals, no statistics needed<br/>guardrail failures, schema failures,<br/>provider errors, failed zero check,<br/>spend ceiling, untiered tool, canary change<br/>5 to 15 minutes"]
-    SRC --> SLOW["Statistical signals, sized by samples<br/>keeper and operator accept rates,<br/>nightly backtest, grounding rate<br/>7 to 14 days"]
-    SRC --> CAL["Calibration fit per zone<br/>isotonic, Platt while sparse"]
-
-    HARD --> AUTO["Automatic<br/>degrade, failover, rollback"]
-    HARD --> PAGE["Named responder"]
-    SLOW --> PAGE
-    CAL --> GATE{"Expected calibration error<br/>better than the live table?"}
-    GATE -->|"no"| REJ["Rejected, live table stays"]
-    GATE -->|"yes"| PROM["Promoted through the eval gate"]
-
-    AUTO --> FB["The one fallback path<br/>drilled quarterly"]
-    KILL["Kill switch<br/>per capability and estate wide"] --> FB
-    PAGE -.->|"incident becomes a permanent case"| SETS["Eval sets"]
-
-    classDef fast fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    classDef slow fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef fb fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class HARD,AUTO fast;
-    class SLOW slow;
-    class FB,KILL,GATE fb;
-```
+![ADR-AI-003: Production Monitoring of AI Behaviour](../../diagrams/adr-related/platform-adr-ai-003-production-monitoring.svg)
 
 | Symbol | Meaning |
 |---|---|
