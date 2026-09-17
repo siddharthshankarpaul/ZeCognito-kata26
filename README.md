@@ -31,8 +31,9 @@ A newly-appointed Countess, a patchy WiFi signal, and 200+ animals, waiting for 
 | 10 | [Architecture Decision Records](#10-architecture-decision-records-decision-log) | The full decision log |
 | 11 | [Deployment view](#11-deployment-view) | Edge, core and cloud, and what runs where |
 | 12 | [CI/CD](#12-cicd) | The deployment pipeline |
-| 13 | [Traceability matrix](#13-traceability-matrix-brief--criterion--where-its-answered) | Every brief requirement, and where it's answered |
-| 14 | [Assumptions](#14-assumptions) | What we took on faith, and how to check it |
+| 13 | [Engineering practices](#13-engineering-practices) | How we build and run it, across every decision |
+| 14 | [Traceability matrix](#14-traceability-matrix-brief--criterion--where-its-answered) | Every brief requirement, and where it's answered |
+| 15 | [Assumptions](#15-assumptions) | What we took on faith, and how to check it |
 
 ---
 
@@ -219,6 +220,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 | **ADR-005** | Edge-vs-Cloud Computer-Vision Inference Placement | Accepted | Latency/privacy/cost-sensitive CV (counting, safety) runs at the edge on Lookout; heavier/batch analysis runs in cloud. Anonymised data only leaves the estate. | [docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md](docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md) |
 | **ADR-006** | Edge Anonymiser, No Faces Leave the Estate | Accepted | Identity stripped at the edge before any event is published; privacy-by-design for footfall and welfare CV. EU AI Act aligned. | [docs/adrs/platform/ADR-006-edge-anonymiser.md](docs/adrs/platform/ADR-006-edge-anonymiser.md) |
 | **ADR-007** | Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx | Proposed | Illustrative CapEx/OpEx breakdown for the edge hardware and AI OpEx above; pushes spend into one-time capital at the edge and keeps LLM gateway spend on one visible line. | [docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md](docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md) |
+| **ADR-008** | The Decision and Audit Log, One Immutable Record of Every Gate Decision | Proposed | Every gate decision, AI-influenced or not, writes one append-only record with the proposal, its inputs, the policy version and the verdict, committed with the action. Works offline at the turnstile and reconciles later; keeps pseudonyms so erasure and a seven-year record can coexist. | [docs/adrs/platform/ADR-008-decision-and-audit-log.md](docs/adrs/platform/ADR-008-decision-and-audit-log.md) |
 
 **Platform: the AI layer**
 
@@ -290,7 +292,44 @@ One pipeline, two lanes: deterministic services get a classic test pyramid, whil
 
 ---
 
-## 13. Traceability matrix (brief → criterion → where it's answered)
+## 13. Engineering Practices
+
+The ADRs record *what we decided and why*. These record *how we build and run it*: the practices that cut across every decision rather than sitting inside one. Each names the ADRs it operationalises, carries a measurable signal for whether it's actually working, and states what we deliberately **don't** do.
+
+**Building the platform**
+
+| Practice | What it covers |
+|---|---|
+| [Agentic Development Lifecycle (ADLC)](docs/engineering-practices/agentic-development-lifecycle.md) | Agents build features in tandem, with persona agents standing in for scarce keeper and vet time. A deterministic gate decides what merges without a human, mirroring the two-plane model it builds. |
+| [Offline-First Engineering](docs/engineering-practices/offline-first-engineering.md) | The network being down is the normal case, not the error case. Idempotent consumers, buffering at every hop, visible degradation, and a quarterly disconnected-shift drill. |
+
+**Running the AI**
+
+| Practice | What it covers |
+|---|---|
+| [MLOps](docs/engineering-practices/mlops.md) | The lifecycle around the eval gate: artefact registry and ownership, golden-set curation, triggered rather than scheduled retraining, and how a CV model reaches a GPU box in an animal house. |
+| [AIOps](docs/engineering-practices/aiops.md) | Who gets out of bed. One platform-wide rota, published kill-switch authority, a drill calendar booked at quarter start, and incidents classified on blast radius. |
+
+**Operating the estate**
+
+| Practice | What it covers |
+|---|---|
+| [Edge Fleet and Device Lifecycle](docs/engineering-practices/edge-fleet-and-device-lifecycle.md) | ~300 devices across 55 enclosures on two transports that don't share a firmware path. Enrolment, calibration debt as a funded number, batched maintenance rounds, and why battery-sensor firmware is close to immutable. |
+| [Observability and Audit](docs/engineering-practices/observability-and-audit.md) | Both planes, including the money path that has no AI in it. One correlation ID across the gate seam, three never-merged surfaces, and a quarterly replay drill that fails if anyone consults the live system. |
+| [Privacy, Compliance and Data Governance](docs/engineering-practices/privacy-compliance-and-data-governance.md) | The EU AI Act and Digital Fairness Act surface in one place: anonymise before egress, consent checked per use, tiered retention, and the refusals we made deliberately. |
+| [FinOps and Cost Engineering](docs/engineering-practices/finops-and-cost-engineering.md) | Four cost lines with four owners, unit economics that must not grow with visitor volume, and the finding worth defending: the largest recurring cost is keeper and vet labour, not compute. |
+
+**Considered, not adopted**
+
+| Practice | What it covers |
+|---|---|
+| [Graph Engineering](docs/engineering-practices/graph-engineering-considered.md) | Evaluated for the husbandry corpus, estate topology and crowd flow, and set aside in each case. Recorded with the specific conditions that would change our mind. |
+
+**CI/CD** is covered as its own section at [§12](#12-cicd), with the full two-lane pipeline in [docs/warden-cicd-pipeline.md](docs/warden-cicd-pipeline.md).
+
+---
+
+## 14. Traceability matrix (brief → criterion → where it's answered)
 
 | Brief requirement | Judging criterion | Where answered |
 |---|---|---|
@@ -310,7 +349,7 @@ One pipeline, two lanes: deterministic services get a classic test pyramid, whil
 
 ---
 
-## 14. Assumptions
+## 15. Assumptions
 
 | Assumption | Source | How to validate |
 |---|---|---|

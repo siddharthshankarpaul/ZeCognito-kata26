@@ -23,6 +23,7 @@ The brief asks for trade-off analysis, so the Alternatives and Consequences sect
 | [ADR-005](ADR-005-edge-vs-cloud-cv-placement.md) | Latency/privacy/cost-sensitive computer vision (counting, safety) runs on the edge; heavier batch analysis runs in the cloud on already-anonymised data. | Per-deployment edge hardware and tuning cost, in exchange for counting and safety signals that work with no network dependency. |
 | [ADR-006](ADR-006-edge-anonymiser.md) | Identity is stripped from every camera frame at the edge, on-device, before anything is published. | Compute cost on every camera deployment, in exchange for no raw or identifiable frame ever leaving the estate. |
 | [ADR-007](ADR-007-cost-model-and-investment-strategy.md) | Push spend into one-time CapEx at the edge wherever it removes a recurring cloud bill; keep AI OpEx on one visible, tiered line through Augur. | Capital paid up front, before 3x growth shows up in revenue, in exchange for a cost structure that doesn't surprise Finance mid-month. |
+| [ADR-008](ADR-008-decision-and-audit-log.md) | Every gate decision, AI-influenced or not, writes one immutable record containing the proposal, its inputs, the policy applied and the verdict, committed with the action itself. | A write-path dependency on the gate and a seven-year retention commitment, in exchange for being able to prove what happened and who decided. |
 
 ### The AI layer
 
