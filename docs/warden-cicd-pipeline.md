@@ -6,20 +6,7 @@ One pipeline, two lanes: deterministic services get a classic test pyramid; advi
 
 ## Pipeline
 
-```mermaid
-flowchart LR
-    Dev["Commit (trunk-based)"] --> Build["Build + Unit Tests"]
-    Build --> Arch["Architecture Fitness Functions<br/>plane separation, contract tests"]
-    Arch --> Split{Change type?}
-    Split -->|Deterministic service| PyrTest["Test pyramid<br/>integration + e2e"]
-    Split -->|Advisory / AI| EvalGate["Golden-set eval gate<br/>+ drift check"]
-    PyrTest --> Stage["Staging"]
-    EvalGate --> Shadow["Shadow / Canary<br/>+ human sign-off"]
-    Stage --> Prod["Deploy"]
-    Shadow --> Prod
-    Prod --> Edge["Staged OTA to MQTT edge nodes"]
-    Prod --> Monitor["Prod eval + drift monitoring"]
-```
+![The Warden Platform: CI/CD Pipeline](diagrams/warden-cicd-pipeline.svg)
 
 ---
 

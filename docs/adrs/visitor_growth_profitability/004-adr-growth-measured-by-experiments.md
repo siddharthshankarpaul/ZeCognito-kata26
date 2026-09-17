@@ -23,37 +23,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    PROP["Proposal from the Advisor<br/>states success criteria up front"]
-    SPLIT{"Can a held-out<br/>group be defined?"}
-    AB["Controlled comparison<br/>treatment vs. held-out group"]
-    BA["Before/after comparison<br/>confounders logged and named"]
-    CONF["Weather, holidays, concurrent<br/>changes logged alongside outcome"]
-    RESULT{"Effect ≥ minimum<br/>worth acting on?"}
-    WORKED["Counted as working<br/>feeds future proposals"]
-    INCONCLUSIVE["Inconclusive<br/>not treated as a negative result"]
-    INVEST["Investment decision"]
-    REVIEW["Finance review<br/>required before proceeding"]
-
-    PROP --> SPLIT
-    SPLIT -->|"yes"| AB
-    SPLIT -->|"no"| BA
-    CONF --> AB
-    CONF --> BA
-    AB --> RESULT
-    BA --> RESULT
-    RESULT -->|"yes"| WORKED
-    RESULT -->|"no"| INCONCLUSIVE
-    WORKED -.->|"one-off capital decision"| INVEST --> REVIEW
-
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef weak fill:#EEEDFE,stroke:#534AB7,color:#26215C;
-    class SPLIT,RESULT gate;
-    class AB,CONF det;
-    class BA weak;
-```
+![ADR-004: Growth Measured by Controlled Experiments, Not Correlation](../../diagrams/adr-related/growth-adr-004-growth-measured-by-experiments.svg)
 
 | Symbol | Meaning |
 |---|---|

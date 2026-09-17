@@ -28,50 +28,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    subgraph ing["Ingestion, per document"]
-        direction TB
-        DOC["Document<br/>reference, care sheet, procedure,<br/>profile, case record"]
-        CHUNK["Structure aware chunking<br/>token ceiling as fallback"]
-        ENR["Enrich each chunk<br/>title, heading path, species,<br/>document type, provenance"]
-        EMB["Embed<br/>open weight, self hosted, pinned"]
-        DOC --> CHUNK --> ENR --> EMB
-    end
-
-    subgraph store["One store, Postgres with a vector extension"]
-        direction LR
-        VEC["Vector index"]
-        KW["Keyword index"]
-        META["Metadata and provenance"]
-    end
-
-    Q["Question"]
-    FILT["Metadata filter first<br/>species, type, review status"]
-    H1["Keyword search<br/>identifiers, binomials, numbers"]
-    H2["Dense vector search<br/>conceptual paraphrase"]
-    FUSE["Reciprocal rank fusion<br/>weighting is versioned"]
-    DEPRI["Rank overdue documents lower"]
-    RERANK["Reranker, precision at the top"]
-    TOPK["A few chunks, as untrusted data"]
-    REBUILD["Embedding change means a<br/>FULL rebuild, never a mixed index"]
-
-    EMB --> store
-    Q --> FILT
-    FILT --> H1
-    FILT --> H2
-    H1 --> FUSE
-    H2 --> FUSE
-    store --- H1
-    store --- H2
-    FUSE --> DEPRI --> RERANK --> TOPK
-    REBUILD -.-> store
-
-    classDef key fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class FUSE,H1 key;
-    classDef one fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    class store one;
-```
+![ADR-009: Retrieval Index Design, Chunking, Embeddings and Hybrid Search](../../diagrams/adr-related/animal-monitoring-adr-009-retrieval-index-design.svg)
 
 | Symbol | Meaning |
 |---|---|

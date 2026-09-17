@@ -22,35 +22,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph TX["Transactional plane, deterministic"]
-        direction TB
-        T1["Ticketing & payments"]
-        T2["Access control"]
-        T3["Audit log"]
-    end
-
-    subgraph GATE["Deterministic Decision Gate"]
-        direction TB
-        G1["Applies fixed rules/policy<br/>to every proposal"]
-    end
-
-    subgraph ADV["Advisory plane, non-deterministic"]
-        direction TB
-        A1["Augur, Guide, Ark,<br/>footfall, pricing advisor"]
-    end
-
-    ADV -.->|"proposal, never an action"| GATE
-    GATE ==>|"approved, audited action only"| TX
-
-    classDef tx fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef adv fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class T1,T2,T3 tx;
-    class A1 adv;
-    class G1 gate;
-```
+![ADR-003: The Two-Plane Safety Model, Deterministic Transactional vs Non-Deterministic Advisory](../../diagrams/adr-related/platform-adr-003-two-plane-safety-model.svg)
 
 | Symbol | Meaning |
 |---|---|

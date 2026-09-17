@@ -32,49 +32,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    SIG["Signals per animal<br/>intake, weight, activity, den time"]
-
-    CORPUS["Curated husbandry corpus<br/>care sheets and references,<br/>every claim cited"]
-    PROP["Retrieval proposes<br/>feed frequency, fasting tolerance,<br/>seasonal patterns worth expecting"]
-    VET{"Vet accepts, edits<br/>or rejects each field"}
-    SPEC["Rhythm per species<br/>configuration, vet signed off"]
-    BASE["Normal per individual<br/>rolling 30 day median and spread<br/>seasonal, illness periods excluded"]
-    CLOUD["Trained nightly in the cloud<br/>back tested against real vet visits<br/>hub computes locally if the cloud is away"]
-
-    RULES["Plain rules, shipped first<br/>not dispensed, not eaten, slow finish,<br/>leftovers rising, hopper jam"]
-    Z["Robust z score<br/>spreads from this animal's median"]
-    PERS{"Persists?<br/>N of the last M"}
-    CORR{"Second signal<br/>within 48 hours?"}
-    KE["Known events<br/>diet change, move, treatment,<br/>each with a close date"]
-    PHYS["Physical danger<br/>temperature out of range<br/>no baseline, no waiting"]
-
-    LOOK["Worth a look"]
-    ACT["Act"]
-    NONE["Nothing fires"]
-
-    SIG --> RULES --> LOOK
-    SIG --> Z --> PERS
-    CORPUS --> PROP --> VET
-    VET -->|"accepted"| SPEC
-    VET -->|"rejected, no effect"| NONE
-    SPEC --> BASE
-    CLOUD --> BASE --> Z
-    KE -.->|"suppresses the signals it explains"| PERS
-    PERS -->|"no"| NONE
-    PERS -->|"yes"| CORR
-    CORR -->|"no"| LOOK
-    CORR -->|"yes"| ACT
-    SIG --> PHYS --> ACT
-
-    classDef cfg fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef urgent fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class SPEC,RULES,CORPUS cfg;
-    class PERS,CORR,KE,VET gate;
-    class PHYS,ACT urgent;
-```
+![ADR-004: Feeding and Health, Step 2. Learning Normal and Spotting Drift](../../diagrams/adr-related/animal-monitoring-adr-004-feeding-and-health-learning-normal.svg)
 
 | Symbol | Meaning |
 |---|---|

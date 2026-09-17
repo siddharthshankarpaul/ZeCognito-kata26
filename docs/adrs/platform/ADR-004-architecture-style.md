@@ -23,38 +23,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph EDGE["Event-driven edge"]
-        direction TB
-        E1["MQTT store-and-forward<br/>ADR-001"]
-    end
-
-    subgraph CORE["Service-based transactional core"]
-        direction TB
-        C1["Ticketing / Admissions"]
-        C2["Pricing"]
-        C3["Access control"]
-        C4["Welfare"]
-    end
-
-    subgraph READ["CQRS read models"]
-        direction TB
-        R1["Occupancy / dwell views"]
-        R2["Training tables"]
-        R3["Dashboards"]
-    end
-
-    EDGE --> CORE
-    CORE -->|"events"| READ
-
-    classDef edge fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef core fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef read fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    class E1 edge;
-    class C1,C2,C3,C4 core;
-    class R1,R2,R3 read;
-```
+![ADR-004: Architecture Style, Service-Based Core with Event-Driven Edge and CQRS](../../diagrams/adr-related/platform-adr-004-architecture-style.svg)
 
 | Symbol | Meaning |
 |---|---|

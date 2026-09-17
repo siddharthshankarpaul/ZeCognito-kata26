@@ -22,56 +22,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    subgraph dev["Devices, MQTT clients"]
-        direction LR
-        S1["Environment nodes"]
-        S2["Water probes"]
-        S3["Feeders, load cells"]
-        S4["RFID, weigh pads"]
-        S5["Cameras, PoE"]
-    end
-
-    subgraph edge["Zone edge hub pair, system of record"]
-        direction TB
-        BR["MQTT broker<br/>persistent queue"]
-        TS["Time series store<br/>90 days"]
-        RE["Rules and baselines"]
-        AL["Alerting"]
-        RM["Read models"]
-        SF["Sync agent"]
-        GPU["GPU box<br/>counts only"]
-        BR --> TS --> RE --> AL
-        TS --> RM
-        TS --> SF
-        GPU --> BR
-    end
-
-    subgraph cloudz["Cloud, downstream consumer"]
-        direction TB
-        LOG["Durable event log"]
-        LH["Lakehouse, full history"]
-        TR["Nightly baseline training"]
-        GA["Writing workflows"]
-        LOG --> LH --> TR
-        LH --> GA
-    end
-
-    KA["Keeper app<br/>works offline"]
-
-    dev -->|"LoRaWAN or Ethernet"| BR
-    AL --> KA
-    RM --> KA
-    SF ==>|"forwarded on reconnect"| LOG
-    TR -.->|"versioned baselines back"| RE
-
-    classDef sor fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class BR sor;
-    style dev fill:#F3F1EE,stroke:#6B6255,color:#2E2A24
-    style edge fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-    style cloudz fill:#E6F1FB,stroke:#185FA5,color:#042C53
-```
+![ADR-001: Edge First, Event Driven Architecture with the Hub as System of Record](../../diagrams/adr-related/animal-monitoring-adr-001-edge-first-event-driven-architecture.svg)
 
 | Symbol | Meaning |
 |---|---|

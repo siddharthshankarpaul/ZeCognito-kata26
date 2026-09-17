@@ -54,36 +54,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph CAPEX["CapEx, one time, at the edge"]
-        direction TB
-        SENS["MQTT sensors"]
-        EDGE["Edge cluster nodes"]
-        PIR["Piranha GPU box + cameras"]
-        GW["Estate gateway"]
-        GATE["Gate connectivity"]
-    end
-
-    subgraph OPEX["OpEx, recurring, in the cloud"]
-        direction TB
-        CLOUD["Ingestion, event backbone,<br/>feature store"]
-        AUG["Augur: LLM gateway spend"]
-        NET["Network upkeep"]
-    end
-
-    LABOUR["Keeper &amp; vet annotation labour<br/>the largest recurring line"]
-
-    CAPEX -.->|"avoids a recurring<br/>streaming/inference bill"| OPEX
-    LABOUR -->|"real recurring cost,<br/>not compute"| OPEX
-
-    classDef capex fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef opex fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef labour fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class SENS,EDGE,PIR,GW,GATE capex;
-    class CLOUD,AUG,NET opex;
-    class LABOUR labour;
-```
+![ADR-007: Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx](../../diagrams/adr-related/platform-adr-007-cost-model-and-investment-strategy.svg)
 
 | Symbol | Meaning |
 |---|---|

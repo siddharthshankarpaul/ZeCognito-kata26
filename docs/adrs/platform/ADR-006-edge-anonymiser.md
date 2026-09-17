@@ -23,24 +23,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    CAM["Camera"]
-    ANON["Edge Anonymiser<br/>strips identity, on-device"]
-    BUS["Estate event bus"]
-    FOOT["Footfall analytics"]
-    WELFARE["Animal welfare monitoring"]
-
-    CAM --> ANON -->|"anonymised events only"| BUS
-    BUS --> FOOT
-    BUS --> WELFARE
-
-    classDef edge fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef out fill:#FAEEDA,stroke:#854F0B,color:#412402;
-
-    class CAM,ANON edge;
-    class BUS out;
-```
+![ADR-006: Edge Anonymiser, No Faces Leave the Estate](../../diagrams/adr-related/platform-adr-006-edge-anonymiser.svg)
 
 | Symbol | Meaning |
 |---|---|

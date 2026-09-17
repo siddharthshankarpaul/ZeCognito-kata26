@@ -22,33 +22,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    subgraph allowed["Allowed pricing inputs, aggregate only"]
-        direction TB
-        A1["Ticket type"]
-        A2["Time of day / season"]
-        A3["Estate-wide demand and capacity"]
-    end
-
-    subgraph blocked["Never given to the pricing path"]
-        direction TB
-        B1["Individual purchase history"]
-        B2["Inferred income / willingness-to-pay"]
-        B3["Any personal or household identifier"]
-    end
-
-    ADV["Profitability Advisor"]
-    PE["Deterministic Pricing Engine<br/>same price for everyone in a segment"]
-
-    allowed --> ADV --> PE
-    blocked -.->|"never connected"| ADV
-
-    classDef ok fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef no fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class A1,A2,A3 ok;
-    class B1,B2,B3 no;
-```
+![ADR-002: Refusal of Individualised and Profiling-Based Pricing](../../diagrams/adr-related/growth-adr-002-refusal-of-individualised-pricing.svg)
 
 | Symbol | Meaning |
 |---|---|

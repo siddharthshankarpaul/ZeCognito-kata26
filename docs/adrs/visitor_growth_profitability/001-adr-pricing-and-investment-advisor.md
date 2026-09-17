@@ -22,31 +22,7 @@ Accepted
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    Signals["Footfall + revenue + season/weather/capacity signals"]
-    ML["Demand & opportunity scoring<br/>classical ML model"]
-    LLM["Rationale drafting<br/>LLM via Augur"]
-    PROP["Proposal + cited rationale"]
-    GATE{{"Deterministic Decision Gate"}}
-    PE["Deterministic Pricing Engine<br/>floors and ceilings"]
-    OPS["Ops / Finance review<br/>investment decisions"]
-    TICK["Ticketing"]
-    EVAL["Eval harness"]
-
-    Signals --> ML --> LLM --> PROP --> GATE
-    GATE -->|"routine price/upsell change"| PE --> TICK
-    GATE -->|"one-off investment"| OPS
-    GATE -.->|"rejected or ungrounded"| EVAL
-    OPS -.->|"outcome logged"| EVAL
-
-    classDef ai fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    classDef det fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
-    classDef gate fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class ML,LLM,PROP ai;
-    class PE,TICK,OPS det;
-    class GATE gate;
-```
+![ADR-001: Hybrid ML+LLM Pricing and Investment Advisor Behind a Deterministic Gate](../../diagrams/adr-related/growth-adr-001-pricing-and-investment-advisor.svg)
 
 | Symbol | Meaning |
 |---|---|

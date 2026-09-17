@@ -38,48 +38,7 @@ Wiring a provider SDK directly into each service is the fastest way to build the
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    SVC["Services<br/>no SDK, no credentials"]
-    CAP["Capability interface<br/>summarise, narrate, answer, rank"]
-
-    subgraph AUG["Augur service (the only route to a model)"]
-        direction TB
-        POL["Identify caller and tier<br/>guardrails, tool tiers, per call log"]
-        BUD{"Spend ceiling reached?"}
-        TIER{"Which capability tier?"}
-        CACHE{"All facts stable?"}
-        RT["Router<br/>exact model version, never an alias"]
-        POL --> BUD
-        BUD -->|"no"| CACHE
-        BUD -->|"yes"| TIER
-        CACHE -->|"no, or a volatile fact"| RT
-    end
-
-    HIT["Served from cache<br/>no model call, no cost"]
-    P1["Primary<br/>passing its evals"]
-    P2["Standby<br/>passing its evals"]
-    P3["Self hosted<br/>shadowed weekly"]
-    FB["Fallback with no model"]
-
-    SVC --> CAP --> POL
-    CACHE -->|"yes"| HIT
-    TIER -->|"welfare, escalate anyway"| RT
-    TIER -->|"advisory, cheap model only"| RT
-    TIER -->|"engagement, degrade"| FB
-    RT --> P1
-    P1 -.->|"outage, seconds"| P2
-    P2 -.->|"both gone, same day"| P3
-    P3 -.->|"unavailable"| FB
-
-    classDef ctrl fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    classDef fb fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef own fill:#F5EEFB,stroke:#5B3B8C,color:#2C1A4A;
-    class BUD,TIER,CACHE ctrl;
-    class FB,HIT fb;
-    class P3 own;
-    style AUG fill:#E6F1FB,stroke:#185FA5,color:#042C53
-```
+![ADR-AI-001: Provider and Model Portability Through a Single Gateway](../../diagrams/adr-related/platform-adr-ai-001-provider-and-model-portability.svg)
 
 | Symbol | Meaning |
 |---|---|

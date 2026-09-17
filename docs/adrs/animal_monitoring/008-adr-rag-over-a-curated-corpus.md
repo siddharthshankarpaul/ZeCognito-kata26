@@ -25,53 +25,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    Q["Keeper or vet question"]
-    PRE{"Hard blocked class?<br/>dose, treatment, first aid,<br/>safe to touch"}
-    HB["No generation<br/>to emergency protocol<br/>and duty vet<br/>scored as success"]
-
-    subgraph corpus["Curated corpus, closed, provenance tracked"]
-        direction TB
-        C1["Husbandry references"]
-        C2["Species care sheets"]
-        C3["Estate procedures"]
-        C4["Species and enclosure profiles"]
-        C5["Vet approved case records"]
-        PROV["Provenance per document<br/>source, edition, approved by,<br/>approved when, review by date"]
-        C1 --- PROV
-        C2 --- PROV
-        C3 --- PROV
-        C4 --- PROV
-        C5 --- PROV
-    end
-
-    RET["Retrieval<br/>overdue documents ranked lower"]
-    HIST["This animal's history<br/>by governed query"]
-    WRAP["Wrap retrieved text as untrusted data"]
-    GEN["Model writes a cited answer"]
-    GR{"Citations resolve?<br/>blocklist clean?"}
-    ANS["Answer with visible provenance"]
-    IDK["Does not know<br/>keyword search and vet number"]
-    OWN["Corpus owner and review cycle<br/>overdue backlog fails CI"]
-
-    Q --> PRE
-    PRE -->|"yes"| HB
-    PRE -->|"no"| RET
-    RET --> WRAP --> GEN
-    HIST --> GEN
-    GEN --> GR
-    GR -->|"pass"| ANS
-    GR -->|"fail"| IDK
-    corpus --> RET
-    OWN -.-> PROV
-
-    classDef block fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class HB,PRE block;
-    classDef prov fill:#F5EEFB,stroke:#5B3B8C,color:#2C1A4A;
-    class PROV,OWN prov;
-    style corpus fill:#E1F5EE,stroke:#0F6E56,color:#04342C
-```
+![ADR-008: Retrieval Over a Curated, Provenance Tracked Corpus](../../diagrams/adr-related/animal-monitoring-adr-008-rag-over-a-curated-corpus.svg)
 
 | Symbol | Meaning |
 |---|---|

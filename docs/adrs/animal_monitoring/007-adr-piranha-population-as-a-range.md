@@ -25,53 +25,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    subgraph obs["Three observations, different reliability"]
-        direction TB
-        MC["Manual count at tank service<br/>the truth, moves it a lot"]
-        FF["Food eaten per fish<br/>always on, detects change<br/>without counting"]
-        CAM["Camera count, any vision route<br/>frequent, biased low<br/>moves it a little"]
-    end
-
-    KE["Known events<br/>restock, found death, transfer"]
-    SSM["Bayesian state space model<br/>population as a slowly changing<br/>hidden number, learns an undercount<br/>per vision route from manual counts"]
-    POST["Posterior<br/>around 38, most likely 34 to 43,<br/>trending down"]
-
-    CONF{"Confident the level<br/>has actually moved?"}
-    ALERT["Change alert"]
-    QUIET["No alert, this is noise"]
-
-    DIS{"Camera trend against<br/>food per fish trend<br/>diverging?"}
-    INV["Investigation<br/>free, needs no labels"]
-
-    DEN["Density against tank volume"]
-    SPL["Splash sensor"]
-    SAFE["Safety alert<br/>does not wait for the model"]
-
-    MC --> SSM
-    FF --> SSM
-    CAM --> SSM
-    KE ==>|"observed change, not anomaly"| SSM
-    SSM --> POST --> CONF
-    CONF -->|"yes"| ALERT
-    CONF -->|"no"| QUIET
-    CAM --> DIS
-    FF --> DIS
-    DIS -->|"yes"| INV
-    POST --> DEN --> ALERT
-    SPL ==> SAFE
-    MC -.->|"calibrates the undercount"| SSM
-
-    classDef truth fill:#F5EEFB,stroke:#5B3B8C,color:#2C1A4A;
-    class MC truth;
-    classDef free fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    class FF,DIS,INV free;
-    classDef safety fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class SPL,SAFE safety;
-    classDef out fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class POST out;
-```
+![ADR-007: Population Reported as a Range, Fused From Three Signals](../../diagrams/adr-related/animal-monitoring-adr-007-piranha-population-as-a-range.svg)
 
 | Symbol | Meaning |
 |---|---|
