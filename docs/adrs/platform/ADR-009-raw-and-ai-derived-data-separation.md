@@ -32,27 +32,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart LR
-    RAW[("Raw event store<br/>append-only<br/>beam counts, sensor readings,<br/>ticket scans, de-identified stills")]
-
-    RAW --> CQRS[("CQRS read models<br/>occupancy_view, dwell_view")]
-    RAW --> MODEL["Model / inference"]
-    MODEL --> DERIVED[("AI-derived output store<br/>forecast, welfare score,<br/>population estimate, pricing signal<br/>tagged: source event id + model version")]
-
-    RAW -.->|"backtest ground truth"| EVAL["Eval gate &amp; monthly review<br/>ADR-AI-002, ADR-AI-003"]
-    DERIVED -.->|"never graded against itself"| EVAL
-
-    NEWMODEL["Recalibrated model"] -->|"recompute from raw"| RAW
-    NEWMODEL --> NEWDERIVED["New derived record<br/>old one untouched"]
-
-    classDef raw fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef derived fill:#FBEAF0,stroke:#993556,color:#4B1528;
-    classDef eval fill:#FAEEDA,stroke:#854F0B,color:#412402;
-    class RAW,CQRS raw;
-    class MODEL,DERIVED,NEWMODEL,NEWDERIVED derived;
-    class EVAL eval;
-```
+![ADR-009: Raw Telemetry and AI-Derived Outputs Live in Separate, Pointer-Linked Stores](../../diagrams/adrs/platform-adr-009-raw-and-ai-derived-data-separation.svg)
 
 | Symbol | Meaning |
 |---|---|
