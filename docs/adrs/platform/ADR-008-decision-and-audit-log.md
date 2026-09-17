@@ -35,7 +35,7 @@ Proposed
 
 ## Diagram
 
-![ADR-008: The Decision and Audit Log, One Immutable Record of Every Gate Decision](../diagrams/platform-adr-008-decision-and-audit-log.svg)
+![ADR-008: The Decision and Audit Log, One Immutable Record of Every Gate Decision](../../diagrams/adrs/platform-adr-008-decision-and-audit-log.svg)
 
 | Symbol | Meaning |
 |---|---|
