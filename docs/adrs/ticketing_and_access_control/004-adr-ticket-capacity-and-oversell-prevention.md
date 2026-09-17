@@ -31,22 +31,7 @@ Proposed
 
 ## Diagram
 
-```mermaid
-flowchart TB
-    A["Customer A: buy slot"] --> LOCK{"Remaining &gt; 0?<br/>DB check constraint"}
-    B["Customer B: buy same slot"] --> LOCK
-    LOCK -->|"yes, decrement + create order<br/>same transaction"| OK["Sale succeeds"]
-    LOCK -->|"no, already zero"| SOLD["Sold out, shown before payment"]
-
-    VP["Offline voucher pool<br/>platform/ADR-002"] -.->|"never used for<br/>capacity-limited SKUs"| LOCK
-
-    classDef db fill:#E6F1FB,stroke:#185FA5,color:#042C53;
-    classDef ok fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
-    classDef no fill:#FBEAEA,stroke:#A31515,color:#4A0D0D;
-    class LOCK db;
-    class OK ok;
-    class SOLD no;
-```
+![ADR-004: Capacity-Limited Tickets Are Sold Online-Only, Enforced by One Database Constraint](../../diagrams/adrs/ticketing-adr-004-ticket-capacity-and-oversell-prevention.svg)
 
 | Symbol | Meaning |
 |---|---|

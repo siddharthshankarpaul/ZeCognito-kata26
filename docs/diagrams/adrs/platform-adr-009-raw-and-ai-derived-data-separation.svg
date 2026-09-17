@@ -1,0 +1,151 @@
+<svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1792.09px; background-color: white;" viewBox="0 0 1792.09375 426.85296630859375" role="graphics-document document" aria-roledescription="flowchart-v2">
+<style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#my-svg .cluster-label text{fill:#333;}#my-svg .cluster-label span{color:#333;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .label text,#my-svg span{fill:#333;color:#333;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#my-svg .rough-node .label text,#my-svg .node .label text,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-anchor:middle;}#my-svg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#my-svg .rough-node .label,#my-svg .node .label,#my-svg .image-shape .label,#my-svg .icon-shape .label{text-align:center;}#my-svg .node.clickable{cursor:pointer;}#my-svg .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#my-svg .arrowheadPath{fill:#333333;}#my-svg .edgePaths .path{stroke:#333333;stroke-width:1px;}#my-svg .flowchart-link{stroke:#333333;fill:none;}#my-svg .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#my-svg .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#my-svg .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#my-svg .cluster text{fill:#333;}#my-svg .cluster span{color:#333;}#my-svg .node .collapsed-indicator{fill:#aaaa33;stroke:none;opacity:0.6;}#my-svg .node .collapsed-separator{stroke:#aaaa33;stroke-width:0.75px;}#my-svg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#my-svg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg rect.text{fill:none;stroke-width:0;}#my-svg .icon-shape,#my-svg .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#my-svg .icon-shape p,#my-svg .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#my-svg .icon-shape .label rect,#my-svg .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#9370DB;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].swimlane.cluster rect{filter:none;}#my-svg [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#my-svg [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#my-svg .raw&gt;*{fill:rgb(225, 245, 238)!important;stroke:rgb(15, 110, 86)!important;color:rgb(4, 52, 44)!important;}#my-svg .raw span{fill:rgb(225, 245, 238)!important;stroke:rgb(15, 110, 86)!important;color:rgb(4, 52, 44)!important;}#my-svg .raw tspan{fill:rgb(4, 52, 44)!important;}#my-svg .derived&gt;*{fill:rgb(251, 234, 240)!important;stroke:rgb(153, 53, 86)!important;color:rgb(75, 21, 40)!important;}#my-svg .derived span{fill:rgb(251, 234, 240)!important;stroke:rgb(153, 53, 86)!important;color:rgb(75, 21, 40)!important;}#my-svg .derived tspan{fill:rgb(75, 21, 40)!important;}#my-svg .eval&gt;*{fill:rgb(250, 238, 218)!important;stroke:rgb(133, 79, 11)!important;color:rgb(65, 36, 2)!important;}#my-svg .eval span{fill:rgb(250, 238, 218)!important;stroke:rgb(133, 79, 11)!important;color:rgb(65, 36, 2)!important;}#my-svg .eval tspan{fill:rgb(65, 36, 2)!important;}</style>
+<g>
+<marker id="my-svg_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto">
+<path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto">
+<path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto">
+<path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto">
+<polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
+<circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
+<circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto">
+<circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto">
+<circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
+<path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto">
+<path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto">
+<path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/>
+</marker>
+<marker id="my-svg_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto">
+<path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/>
+</marker>
+<g class="root">
+<g class="clusters"/>
+<g class="edgePaths">
+<path d="M613.125,94.499L617.292,91.284C621.458,88.07,629.792,81.642,637.458,78.427C645.125,75.213,652.125,75.213,655.625,75.213L659.125,75.213" id="my-svg-L_RAW_CQRS_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_RAW_CQRS_0" data-points="W3sieCI6NjEzLjEyNSwieSI6OTQuNDk4NzQ5Nzg2OTUyNzZ9LHsieCI6NjM4LjEyNSwieSI6NzUuMjEzMjMzOTQ3NzUzOX0seyJ4Ijo2NjMuMTI1LCJ5Ijo3NS4yMTMyMzM5NDc3NTM5fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+<path d="M604.572,271.01L610.164,278.449C615.756,285.887,626.941,300.763,638.722,308.201C650.503,315.64,662.88,315.64,669.069,315.64L675.258,315.64" id="my-svg-L_RAW_MODEL_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_RAW_MODEL_0" data-points="W3sieCI6NjA0LjU3MTc3MzA5NDQ0MTcsInkiOjI3MS4wMTA0NzUwMjY1NzY3fSx7IngiOjYzOC4xMjUsInkiOjMxNS42Mzk3MDE4NDMyNjE3fSx7IngiOjY3OS4yNTc4MTI1LCJ5IjozMTUuNjM5NzAxODQzMjYxN31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+<path d="M861.992,315.64L881.374,315.64C900.755,315.64,939.518,315.64,974.926,315.64C1010.333,315.64,1042.385,315.64,1058.411,315.64L1074.438,315.64" id="my-svg-L_MODEL_DERIVED_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_MODEL_DERIVED_0" data-points="W3sieCI6ODYxLjk5MjE4NzUsInkiOjMxNS42Mzk3MDE4NDMyNjE3fSx7IngiOjk3OC4yODEyNSwieSI6MzE1LjYzOTcwMTg0MzI2MTd9LHsieCI6MTA3OC40Mzc1LCJ5IjozMTUuNjM5NzAxODQzMjYxN31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+<path d="M613.125,177.426L617.292,177.426C621.458,177.426,629.792,177.426,656.042,177.426C682.292,177.426,726.458,177.426,783.151,177.426C839.844,177.426,909.063,177.426,978.281,177.426C1047.5,177.426,1116.719,177.426,1189.051,177.426C1261.383,177.426,1336.828,177.426,1393.69,177.426C1450.552,177.426,1488.831,177.426,1507.97,177.426L1527.109,177.426" id="my-svg-L_RAW_EVAL_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_RAW_EVAL_0" data-points="W3sieCI6NjEzLjEyNSwieSI6MTc3LjQyNjQ2Nzg5NTUwNzh9LHsieCI6NjM4LjEyNSwieSI6MTc3LjQyNjQ2Nzg5NTUwNzh9LHsieCI6NzcwLjYyNSwieSI6MTc3LjQyNjQ2Nzg5NTUwNzh9LHsieCI6OTc4LjI4MTI1LCJ5IjoxNzcuNDI2NDY3ODk1NTA3OH0seyJ4IjoxMTg1LjkzNzUsInkiOjE3Ny40MjY0Njc4OTU1MDc4fSx7IngiOjE0MTIuMjczNDM3NSwieSI6MTc3LjQyNjQ2Nzg5NTUwNzh9LHsieCI6MTUzMS4xMDkzNzUsInkiOjE3Ny40MjY0Njc4OTU1MDc4fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+<path d="M1293.438,315.64L1313.243,315.64C1333.049,315.64,1372.661,315.64,1421.237,299.431C1469.813,283.223,1527.352,250.806,1556.122,234.598L1584.892,218.39" id="my-svg-L_DERIVED_EVAL_0" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_DERIVED_EVAL_0" data-points="W3sieCI6MTI5My40Mzc1LCJ5IjozMTUuNjM5NzAxODQzMjYxN30seyJ4IjoxNDEyLjI3MzQzNzUsInkiOjMxNS42Mzk3MDE4NDMyNjE3fSx7IngiOjE1ODguMzc2NjY1NTY1NjI0NSwieSI6MjE2LjQyNjQ2Nzg5NTUwNzh9XQ==" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+<path d="M161.73,246.533L185.107,235.015C208.484,223.498,255.238,200.462,293.971,188.944C332.703,177.426,363.414,177.426,378.77,177.426L394.125,177.426" id="my-svg-L_NEWMODEL_RAW_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_NEWMODEL_RAW_0" data-points="W3sieCI6MTYxLjczMDE1NDU4MzY3MTgzLCJ5IjoyNDYuNTMzMDg0ODY5Mzg0Nzd9LHsieCI6MzAxLjk5MjE4NzUsInkiOjE3Ny40MjY0Njc4OTU1MDc4fSx7IngiOjM5OC4xMjUsInkiOjE3Ny40MjY0Njc4OTU1MDc4fV0=" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+<path d="M161.73,300.533L185.107,312.051C208.484,323.569,255.238,346.604,295.326,358.122C335.414,369.64,368.836,369.64,385.547,369.64L402.258,369.64" id="my-svg-L_NEWMODEL_NEWDERIVED_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_NEWMODEL_NEWDERIVED_0" data-points="W3sieCI6MTYxLjczMDE1NDU4MzY3MTgzLCJ5IjozMDAuNTMzMDg0ODY5Mzg0Nzd9LHsieCI6MzAxLjk5MjE4NzUsInkiOjM2OS42Mzk3MDE4NDMyNjE3fSx7IngiOjQwNi4yNTc4MTI1LCJ5IjozNjkuNjM5NzAxODQzMjYxN31d" data-look="classic" marker-end="url(#my-svg_flowchart-v2-pointEnd)"/>
+</g>
+<g class="edgeLabels">
+<g class="edgeLabel">
+<g class="label" data-id="L_RAW_CQRS_0" transform="translate(0, 0)">
+<foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject>
+</g>
+</g>
+<g class="edgeLabel">
+<g class="label" data-id="L_RAW_MODEL_0" transform="translate(0, 0)">
+<foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject>
+</g>
+</g>
+<g class="edgeLabel">
+<g class="label" data-id="L_MODEL_DERIVED_0" transform="translate(0, 0)">
+<foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject>
+</g>
+</g>
+<g class="edgeLabel" transform="translate(978.28125, 177.4264678955078)">
+<g class="label" data-id="L_RAW_EVAL_0" transform="translate(-75.15625, -12)">
+<foreignObject width="150.3125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>backtest ground truth</p></span></div></foreignObject>
+</g>
+</g>
+<g class="edgeLabel" transform="translate(1412.2734375, 315.6397018432617)">
+<g class="label" data-id="L_DERIVED_EVAL_0" transform="translate(-93.8359375, -12)">
+<foreignObject width="187.671875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>never graded against itself</p></span></div></foreignObject>
+</g>
+</g>
+<g class="edgeLabel" transform="translate(301.9921875, 177.4264678955078)">
+<g class="label" data-id="L_NEWMODEL_RAW_0" transform="translate(-71.1328125, -12)">
+<foreignObject width="142.265625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>recompute from raw</p></span></div></foreignObject>
+</g>
+</g>
+<g class="edgeLabel">
+<g class="label" data-id="L_NEWMODEL_NEWDERIVED_0" transform="translate(0, 0)">
+<foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject>
+</g>
+</g>
+</g>
+<g class="nodes">
+<g class="node default raw" id="my-svg-flowchart-RAW-0" data-look="classic" transform="translate(505.625, 177.4264678955078)">
+<path d="M0,15.808823529411764 a107.5,15.808823529411764 0,0,0 215,0 a107.5,15.808823529411764 0,0,0 -215,0 l0,174.80882352941177 a107.5,15.808823529411764 0,0,0 215,0 l0,-174.80882352941177" class="basic label-container outer-path" style="fill:#E1F5EE !important;stroke:#0F6E56 !important" transform="translate(-107.5, -103.21323529411765)"/>
+<g class="label" style="color:#04342C !important" transform="translate(-100, -62)">
+<rect/>
+<foreignObject width="200" height="144"><div style="color: rgb(4, 52, 44) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#04342C !important" class="nodeLabel"><p>Raw event store<br />append-only<br />beam counts, sensor readings,<br />ticket scans, de-identified stills</p></span></div></foreignObject>
+</g>
+</g>
+<g class="node default raw" id="my-svg-flowchart-CQRS-2" data-look="classic" transform="translate(770.625, 75.2132339477539)">
+<path d="M0,15.808823529411764 a107.5,15.808823529411764 0,0,0 215,0 a107.5,15.808823529411764 0,0,0 -215,0 l0,102.80882352941177 a107.5,15.808823529411764 0,0,0 215,0 l0,-102.80882352941177" class="basic label-container outer-path" style="fill:#E1F5EE !important;stroke:#0F6E56 !important" transform="translate(-107.5, -67.21323529411765)"/>
+<g class="label" style="color:#04342C !important" transform="translate(-100, -26)">
+<rect/>
+<foreignObject width="200" height="72"><div style="color: rgb(4, 52, 44) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#04342C !important" class="nodeLabel"><p>CQRS read models<br />occupancy_view, dwell_view</p></span></div></foreignObject>
+</g>
+</g>
+<g class="node default derived" id="my-svg-flowchart-MODEL-4" data-look="classic" transform="translate(770.625, 315.6397018432617)">
+<rect class="basic label-container" style="fill:#FBEAF0 !important;stroke:#993556 !important" x="-91.3671875" y="-27" width="182.734375" height="54"/>
+<g class="label" style="color:#4B1528 !important" transform="translate(-61.3671875, -12)">
+<rect/>
+<foreignObject width="122.734375" height="24"><div style="color: rgb(75, 21, 40) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4B1528 !important" class="nodeLabel"><p>Model / inference</p></span></div></foreignObject>
+</g>
+</g>
+<g class="node default derived" id="my-svg-flowchart-DERIVED-6" data-look="classic" transform="translate(1185.9375, 315.6397018432617)">
+<path d="M0,15.808823529411764 a107.5,15.808823529411764 0,0,0 215,0 a107.5,15.808823529411764 0,0,0 -215,0 l0,174.80882352941177 a107.5,15.808823529411764 0,0,0 215,0 l0,-174.80882352941177" class="basic label-container outer-path" style="fill:#FBEAF0 !important;stroke:#993556 !important" transform="translate(-107.5, -103.21323529411765)"/>
+<g class="label" style="color:#4B1528 !important" transform="translate(-100, -62)">
+<rect/>
+<foreignObject width="200" height="144"><div style="color: rgb(75, 21, 40) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4B1528 !important" class="nodeLabel"><p>AI-derived output store<br />forecast, welfare score,<br />population estimate, pricing signal<br />tagged: source event id + model version</p></span></div></foreignObject>
+</g>
+</g>
+<g class="node default eval" id="my-svg-flowchart-EVAL-8" data-look="classic" transform="translate(1657.6015625, 177.4264678955078)">
+<rect class="basic label-container" style="fill:#FAEEDA !important;stroke:#854F0B !important" x="-126.4921875" y="-39" width="252.984375" height="78"/>
+<g class="label" style="color:#412402 !important" transform="translate(-96.4921875, -24)">
+<rect/>
+<foreignObject width="192.984375" height="48"><div style="color: rgb(65, 36, 2) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#412402 !important" class="nodeLabel"><p>Eval gate &amp; monthly review<br />ADR-AI-002, ADR-AI-003</p></span></div></foreignObject>
+</g>
+</g>
+<g class="node default derived" id="my-svg-flowchart-NEWMODEL-11" data-look="classic" transform="translate(106.9296875, 273.53308486938477)">
+<rect class="basic label-container" style="fill:#FBEAF0 !important;stroke:#993556 !important" x="-98.9296875" y="-27" width="197.859375" height="54"/>
+<g class="label" style="color:#4B1528 !important" transform="translate(-68.9296875, -12)">
+<rect/>
+<foreignObject width="137.859375" height="24"><div style="color: rgb(75, 21, 40) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4B1528 !important" class="nodeLabel"><p>Recalibrated model</p></span></div></foreignObject>
+</g>
+</g>
+<g class="node default derived" id="my-svg-flowchart-NEWDERIVED-14" data-look="classic" transform="translate(505.625, 369.6397018432617)">
+<rect class="basic label-container" style="fill:#FBEAF0 !important;stroke:#993556 !important" x="-99.3671875" y="-39" width="198.734375" height="78"/>
+<g class="label" style="color:#4B1528 !important" transform="translate(-69.3671875, -24)">
+<rect/>
+<foreignObject width="138.734375" height="48"><div style="color: rgb(75, 21, 40) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4B1528 !important" class="nodeLabel"><p>New derived record<br />old one untouched</p></span></div></foreignObject>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="my-svg-drop-shadow" height="130%" width="130%">
+<feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/>
+</filter>
+</defs>
+<defs>
+<filter id="my-svg-drop-shadow-small" height="150%" width="150%">
+<feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/>
+</filter>
+</defs>
+</svg>
