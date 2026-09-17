@@ -21,7 +21,7 @@ Accepted
 
 ## Diagram
 
-![ADR-003: Re-Entry Model and Gate Connectivity as Deliberate Investment](../../diagrams/adr-related/ticketing-adr-003-reentry-and-gate-connectivity.svg)
+![ADR-003: Re-Entry Model and Gate Connectivity as Deliberate Investment](../../diagrams/adrs/ticketing-adr-003-reentry-and-gate-connectivity.svg)
 
 | Symbol | Meaning |
 |---|---|

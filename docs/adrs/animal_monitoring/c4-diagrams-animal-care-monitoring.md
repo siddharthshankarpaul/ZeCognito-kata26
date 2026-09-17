@@ -8,7 +8,7 @@ How much and how well the animals eat, and how we track their health, are one pi
 
 ## Level 1. System Context
 
-![C4 Diagrams: Animal Care Monitoring — Level 1. System Context](../../diagrams/adr-related/animal-monitoring-c4-animal-care-l1-system-context.svg)
+![C4 Diagrams: Animal Care Monitoring — Level 1. System Context](../../diagrams/adrs/animal-monitoring-c4-animal-care-l1-system-context.svg)
 
 **Key.** Stadium shapes are people. Teal is the system these diagrams describe. Grey is a system it depends on or serves, owned elsewhere.
 
@@ -18,7 +18,7 @@ How much and how well the animals eat, and how we track their health, are one pi
 
 ## Level 2. Container
 
-![C4 Diagrams: Animal Care Monitoring — Level 2. Container](../../diagrams/adr-related/animal-monitoring-c4-animal-care-l2-container.svg)
+![C4 Diagrams: Animal Care Monitoring — Level 2. Container](../../diagrams/adrs/animal-monitoring-c4-animal-care-l2-container.svg)
 
 **Key.** Green runs on the estate with no internet. Amber cylinders are stores. Purple is the retrieval layer. Red bypasses the baseline. Bold arrows mark the three paths that must never be blocked: the physical danger path, the vet's sign-off, and the one crossing of the unreliable link.
 
@@ -32,7 +32,7 @@ Two arrows are worth following closely. The calibration register feeds into the 
 
 The AI subsystem deep dive. Where exactly a model runs, on what input, and what it is not allowed to do.
 
-![C4 Diagrams: Animal Care Monitoring — Level 3a. Component, where the model is called](../../diagrams/adr-related/animal-monitoring-c4-animal-care-l3a-component-where-the-model-is-called.svg)
+![C4 Diagrams: Animal Care Monitoring — Level 3a. Component, where the model is called](../../diagrams/adrs/animal-monitoring-c4-animal-care-l3a-component-where-the-model-is-called.svg)
 
 **Key.** Grey is deterministic code. Pink is the only place a model runs. Blue is the facts bundle, the only input a model ever sees. Amber are the checks on both sides of it. Red never reaches a model at all.
 
@@ -44,7 +44,7 @@ The AI subsystem deep dive. Where exactly a model runs, on what input, and what 
 
 The second deep dive. How a reading becomes a baseline, and what has to be true before anybody is interrupted.
 
-![C4 Diagrams: Animal Care Monitoring — Level 3b. Component, how normal is learned and drift becomes an alert](../../diagrams/adr-related/animal-monitoring-c4-animal-care-l3b-component-learning-normal-to-alert.svg)
+![C4 Diagrams: Animal Care Monitoring — Level 3b. Component, how normal is learned and drift becomes an alert](../../diagrams/adrs/animal-monitoring-c4-animal-care-l3b-component-learning-normal-to-alert.svg)
 
 **Key.** Pink is retrieval, which proposes and never applies. Purple is the statistical work. Amber diamonds are the four gates a signal has to pass before a person is interrupted. Blue cylinders are versioned configuration. Red is the path that skips all of it.
 

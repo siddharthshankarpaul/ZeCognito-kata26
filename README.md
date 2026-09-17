@@ -36,6 +36,8 @@ A newly-appointed Countess, a patchy WiFi signal, and 200+ animals, waiting for 
 | 15 | [Traceability matrix](#15-traceability-matrix-brief--criterion--where-its-answered) | Every brief requirement, and where it's answered |
 | 16 | [Assumptions](#16-assumptions) | What we took on faith, and how to check it |
 
+**Reference docs used throughout:** [docs/glossary.md](docs/glossary.md) (every named term, in one place) · [docs/fitness-functions.md](docs/fitness-functions.md) (every automated/monitored threshold) · [docs/rollout-strategy.md](docs/rollout-strategy.md) (the estate-wide build order)
+
 ---
 
 ## 1. Problem Background
@@ -44,14 +46,14 @@ The 72nd Countess Von Digitalis inherited a large, sprawling estate that must be
 
 Her full ask, as we distilled it from the brief:
 
-![Requirements distilled from the brief](docs/diagrams/requirement.jpg)
+![Requirements distilled from the brief](docs/diagrams/overview/requirement.jpg)
 
 ---
 
 ## 2. Architectural "-ility"
 
 
-![Architecture characteristics worksheet](docs/diagrams/characteristics.png)
+![Architecture characteristics worksheet](docs/diagrams/overview/characteristics.png)
 
 **Priorities, the concrete scenario, and the architectural response behind each one is explained here:** [docs/quality-attributes.md](docs/quality-attributes.md)
 
@@ -94,13 +96,13 @@ Her full ask, as we distilled it from the brief:
 
 The whole platform on one page: every actor, the on-estate edge, both planes with the single governed bridge between them, the external systems, and the cross-cutting concerns. Every arrow here is an edge of the C4 container diagram in [§5](#5-master-architecture-view-c4-container); this view adds the principles, patterns, resilience posture and outcomes around it.
 
-![The Warden Platform high-level design: actors and touchpoints feed a deterministic transactional plane; the on-estate edge streams anonymised telemetry over MQTT into an advisory AI plane whose proposals cross a single deterministic decision gate before becoming audited actions; an eval harness verifies every model; external providers are reached only through Augur](docs/diagrams/warden-hld.svg)
+![The Warden Platform high-level design: actors and touchpoints feed a deterministic transactional plane; the on-estate edge streams anonymised telemetry over MQTT into an advisory AI plane whose proposals cross a single deterministic decision gate before becoming audited actions; an eval harness verifies every model; external providers are reached only through Augur](docs/diagrams/overview/warden-hld.svg)
 
 ---
 
 ## 5. Master architecture view (C4 Container)
 
-![Master architecture view: the whole estate as one system, transactional plane, advisory plane, and the deterministic decision gate between them](docs/diagrams/master-architecture.svg)
+![Master architecture view: the whole estate as one system, transactional plane, advisory plane, and the deterministic decision gate between them](docs/diagrams/overview/master-architecture.svg)
 
 ### Legend / Key
 
@@ -125,7 +127,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ### 6.1 Ticketing, family passes & access control
 
-![Ticketing, family passes, and access control flow](docs/diagrams/ticketing.svg)
+![Ticketing, family passes, and access control flow](docs/diagrams/overview/ticketing.svg)
 
 **Solution (2–3 lines):** Tickets are **Ed25519-signed** so a turnstile can verify them **fully offline**; a **local redemption ledger** prevents double-entry when WiFi is down and reconciles via **MQTT QoS 1** on reconnect. Family passes are an **N-admit token** with a **distributed counter**, so a family of *N* can enter through any gate without a duplicate admit.
 **AI role:** deliberately **none in the money/access path** (it stays deterministic). AI appears only as **Guide**, a GenAI concierge that helps visitors *choose* the right ticket advisory, never transacting.
@@ -135,7 +137,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ### 6.2 Footfall & popularity analytics
 
-![Footfall and popularity analytics flow](docs/diagrams/footfall.svg)
+![Footfall and popularity analytics flow](docs/diagrams/overview/footfall.svg)
 
 **Solution (2–3 lines):** Cheap edge nodes and turnstile counts produce **privacy-preserving occupancy counts** (identities stripped by the Anonymiser before anything leaves the enclosure). An **ML analytics** service turns the MQTT event stream into **popularity heatmaps and staffing/hotspot proposals**, which the estate acts on through the gate.
 **AI role:** ML pattern-detection over occupancy time-series → *proposals only*. Humans/ops own the staffing decision; every proposal is tapped into the Eval harness for drift.
@@ -144,7 +146,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 ---
 
 ### 6.3 Animal welfare & piranha census (Ark)
-![Animal welfare and piranha census (Ark) flow](docs/diagrams/animal-welfare.svg)
+![Animal welfare and piranha census (Ark) flow](docs/diagrams/overview/animal-welfare.svg)
 
 **Solution (2–3 lines):** Across the **55 enclosures**, feed/water sensors and **Lookout CV** feed **Ark**, which runs welfare-anomaly models and for the jumping piranha, a **population-estimation** model that flags **count drift** (predation, breeding, escape). Alerts become **deterministic work orders** (vet dispatch, restock) only via the gate; **keepers confirm or correct**, feeding the eval loop.
 **AI role:** the richest AI surface: CV counting/behaviour, anomaly detection, and Augur-generated welfare summaries. **Human-in-the-loop** is mandatory before any welfare action, because both the AI *and* the animals are non-deterministic.
@@ -154,7 +156,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ### 6.4 Visitor growth & profitability
 
-![Visitor growth and profitability flow](docs/diagrams/growth-profitability.svg)
+![Visitor growth and profitability flow](docs/diagrams/overview/growth-profitability.svg)
 
 **Solution (2–3 lines):** A **Profitability & Investment Advisor** fuses footfall, revenue and context (season, weather, capacity) into **dynamic-pricing, upsell and investment proposals**. Prices only change through a **deterministic pricing engine** behind the gate, within pre-set floors/ceilings.
 **AI role:** ML + LLM reasoning to *propose* where to price, upsell and invest: the growth engine. **Individualised or profiling-based pricing is deliberately refused** (see ADRs below) on EU AI Act / Digital Fairness Act grounds: pricing varies by *segment/time/demand*, never by *who you are*.
@@ -175,7 +177,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ### 7.1 Augur: provider-agnostic LLM gateway (resilience zoom-in)
 
-![Augur provider-agnostic LLM gateway resilience zoom-in](docs/diagrams/augur-resilience.svg)
+![Augur provider-agnostic LLM gateway resilience zoom-in](docs/diagrams/overview/augur-resilience.svg)
 
 Augur is the single choke-point through which **every** LLM call passes. It gives us caching (cost + latency), a **budget guard** (hard spend ceilings), **circuit-breaking with fallback** across providers, and a **self-hosted last resort** so a provider price hike, outage, or shutdown becomes a *config change*, not a re-architecture. **ADR:** [docs/adrs/platform/ADR-AI-001](docs/adrs/platform/ADR-AI-001-provider-and-model-portability.md)
 
@@ -217,6 +219,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 
 ## 11. Architecture Decision Records (decision log)
 
+**Estate-wide build order across every ADR below:** [docs/rollout-strategy.md](docs/rollout-strategy.md)
 
 **Platform: architecture**
 
@@ -230,6 +233,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 | **ADR-006** | Edge Anonymiser, No Faces Leave the Estate | Accepted | Identity stripped at the edge before any event is published; privacy-by-design for footfall and welfare CV. EU AI Act aligned. | [docs/adrs/platform/ADR-006-edge-anonymiser.md](docs/adrs/platform/ADR-006-edge-anonymiser.md) |
 | **ADR-007** | Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx | Proposed | Illustrative CapEx/OpEx breakdown for the edge hardware and AI OpEx above; pushes spend into one-time capital at the edge and keeps LLM gateway spend on one visible line. | [docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md](docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md) |
 | **ADR-008** | The Decision and Audit Log, One Immutable Record of Every Gate Decision | Proposed | Every gate decision, AI-influenced or not, writes one append-only record with the proposal, its inputs, the policy version and the verdict, committed with the action. Works offline at the turnstile and reconciles later; keeps pseudonyms so erasure and a seven-year record can coexist. | [docs/adrs/platform/ADR-008-decision-and-audit-log.md](docs/adrs/platform/ADR-008-decision-and-audit-log.md) |
+| **ADR-009** | Raw Telemetry and AI-Derived Outputs Live in Separate, Pointer-Linked Stores | Proposed | Raw sensor/event data and every AI-derived output (forecast, welfare score, pricing signal) live in separate stores joined by a pointer, so evals and audits always grade a model against raw ground truth, never against another model's own output. | [docs/adrs/platform/ADR-009-raw-and-ai-derived-data-separation.md](docs/adrs/platform/ADR-009-raw-and-ai-derived-data-separation.md) |
 
 **Platform: the AI layer**
 
@@ -246,6 +250,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 | **ADR-001** | Admissions as a Modular Monolith, Not Microservices | Accepted | One deployable over one database with enforced module boundaries, so a family-pass purchase, entitlement, and refund stay in a single transaction. | [docs/adrs/ticketing_and_access_control/001-adr-admissions-as-a-modular-monolith.md](docs/adrs/ticketing_and_access_control/001-adr-admissions-as-a-modular-monolith.md) |
 | **ADR-002** | Revocation as a Small, Time-Scoped Deny List | Accepted | A deny list scoped only to today's passes, with hard `revoked` and soft `superseded` (upgrade) classes, and a bounded staleness tolerance at the gate. | [docs/adrs/ticketing_and_access_control/002-adr-revocation-deny-list.md](docs/adrs/ticketing_and_access_control/002-adr-revocation-deny-list.md) |
 | **ADR-003** | Re-Entry Model and Gate Connectivity as Deliberate Investment | Accepted | Day tickets allow unlimited same-day re-entry with no consumed state; gates get real, funded connectivity so offline mode is the fallback, not the default. | [docs/adrs/ticketing_and_access_control/003-adr-reentry-and-gate-connectivity.md](docs/adrs/ticketing_and_access_control/003-adr-reentry-and-gate-connectivity.md) |
+| **ADR-004** | Capacity-Limited Tickets, Online-Only with a Database Constraint | Proposed | A ticket type with a hard capacity ceiling (timed ride slot, limited-seating experience) is sold online-only, its availability enforced by one database constraint in the same transaction as the sale, never by the offline voucher pool. | [docs/adrs/ticketing_and_access_control/004-adr-ticket-capacity-and-oversell-prevention.md](docs/adrs/ticketing_and_access_control/004-adr-ticket-capacity-and-oversell-prevention.md) |
 
 **Visitor growth & profitability**
 
@@ -298,6 +303,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 One pipeline, two lanes: deterministic services get a classic test pyramid, while advisory/AI changes must clear a golden-dataset eval gate and shadow/canary with human sign-off before they can influence the Decision Gate. Architecture fitness functions fail the build if the two-plane separation is ever violated.
 
 **Full pipeline diagram and lane-by-lane breakdown:** [docs/warden-cicd-pipeline.md](docs/warden-cicd-pipeline.md)
+**Every concrete fitness-function threshold, in one table:** [docs/fitness-functions.md](docs/fitness-functions.md)
 
 ---
 
@@ -365,6 +371,7 @@ The ADRs record *what we decided and why*. These record *how we build and run it
 | Funded MQTT edge hardware is sufficient for 55 enclosures + 40 rides | all folders | Validate device count against coverage map. |
 | Ticket revocation rate (~3%) and average party size (~2.5) are estimates, not measured facts | [ticketing_and_access_control](docs/adrs/ticketing_and_access_control) | Validate against real sales data once ticketing launches. |
 | Gate count is assumed small enough for conventional, reliable wiring | [ticketing_and_access_control](docs/adrs/ticketing_and_access_control) | Confirm against the actual site plan before committing to the connectivity investment. |
+| Which specific attractions need a capacity-limited ticket SKU is not named in the brief | [ticketing_and_access_control](docs/adrs/ticketing_and_access_control) | Confirm with the estate which rides/experiences have a real headcount ceiling before building ADR-004's slot-inventory schema. |
 | The footfall "chokepoint" counting assumption may not hold in open plazas or festival grounds | [footfall_and_popularity](docs/adrs/footfall_and_popularity) | Field-validate counter placement once beam/IR hardware is installed. |
 | Piranha tank service frequency (how often real ground truth exists) is unknown | [animal_monitoring](docs/adrs/animal_monitoring) | Confirm with keepers before finalising the calibration cadence. |
 | Whether the estate will fund calibration labour, and whether a vet will help label footage, are both open | [animal_monitoring](docs/adrs/animal_monitoring) | Needs a Countess/Finance decision before Wave 2 hardware is purchased. |

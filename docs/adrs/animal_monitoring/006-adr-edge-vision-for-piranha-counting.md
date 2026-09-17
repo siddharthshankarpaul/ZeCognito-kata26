@@ -40,7 +40,7 @@ Three things worth saying plainly. Cloud inference at 15-minute sampling wouldn'
 
 ## Diagram
 
-![ADR-006: Edge Vision for the Piranha Count, and What It Actually Costs](../../diagrams/adr-related/animal-monitoring-adr-006-edge-vision-for-piranha-counting.svg)
+![ADR-006: Edge Vision for the Piranha Count, and What It Actually Costs](../../diagrams/adrs/animal-monitoring-adr-006-edge-vision-for-piranha-counting.svg)
 
 | Symbol | Meaning |
 |---|---|

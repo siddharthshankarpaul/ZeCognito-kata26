@@ -24,7 +24,7 @@ Accepted
 
 ## Diagram
 
-![ADR-001: Store-and-Forward MQTT as the Edge-to-Cloud Contract](../../diagrams/adr-related/platform-adr-001-store-and-forward-mqtt.svg)
+![ADR-001: Store-and-Forward MQTT as the Edge-to-Cloud Contract](../../diagrams/adrs/platform-adr-001-store-and-forward-mqtt.svg)
 
 | Symbol | Meaning |
 |---|---|

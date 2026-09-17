@@ -30,7 +30,7 @@ Proposed
 
 ## Diagram
 
-![ADR-003: Feeding and Health, Step 1. Measuring Intake and Condition](../../diagrams/adr-related/animal-monitoring-adr-003-feeding-and-health-measuring.svg)
+![ADR-003: Feeding and Health, Step 1. Measuring Intake and Condition](../../diagrams/adrs/animal-monitoring-adr-003-feeding-and-health-measuring.svg)
 
 | Symbol | Meaning |
 |---|---|

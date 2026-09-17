@@ -28,7 +28,7 @@ Proposed
 
 ## Diagram
 
-![ADR-009: Retrieval Index Design, Chunking, Embeddings and Hybrid Search](../../diagrams/adr-related/animal-monitoring-adr-009-retrieval-index-design.svg)
+![ADR-009: Retrieval Index Design, Chunking, Embeddings and Hybrid Search](../../diagrams/adrs/animal-monitoring-adr-009-retrieval-index-design.svg)
 
 | Symbol | Meaning |
 |---|---|

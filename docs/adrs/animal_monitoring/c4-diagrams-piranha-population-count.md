@@ -10,7 +10,7 @@ This is a separate pipeline from animal care monitoring, with different devices,
 
 ## Level 1. System Context
 
-![C4 Diagrams: Piranha Population Count — Level 1. System Context](../../diagrams/adr-related/animal-monitoring-c4-piranha-population-count-l1-system-context.svg)
+![C4 Diagrams: Piranha Population Count — Level 1. System Context](../../diagrams/adrs/animal-monitoring-c4-piranha-population-count-l1-system-context.svg)
 
 **Key.** Stadium shapes are people. Teal is the system these diagrams describe. Grey is owned elsewhere.
 
@@ -20,7 +20,7 @@ This is a separate pipeline from animal care monitoring, with different devices,
 
 ## Level 2. Container
 
-![C4 Diagrams: Piranha Population Count — Level 2. Container](../../diagrams/adr-related/animal-monitoring-c4-piranha-population-count-l2-container.svg)
+![C4 Diagrams: Piranha Population Count — Level 2. Container](../../diagrams/adrs/animal-monitoring-c4-piranha-population-count-l2-container.svg)
 
 **Key.** Green runs on the estate with no internet. Amber cylinders are stores. Red is the deterministic safety signal. Bold arrows are the two inputs that move the estimate most. Dashed arrows are feedback, calibration or paths that may be absent.
 
@@ -32,7 +32,7 @@ This is a separate pipeline from animal care monitoring, with different devices,
 
 Where the vision model runs, what is done to a frame before it gets there, and why the maximum rather than the average.
 
-![C4 Diagrams: Piranha Population Count — Level 3a. Component, the counting pipeline on the GPU box](../../diagrams/adr-related/animal-monitoring-c4-piranha-population-count-l3a-component-counting-pipeline-on-gpu-box.svg)
+![C4 Diagrams: Piranha Population Count — Level 3a. Component, the counting pipeline on the GPU box](../../diagrams/adrs/animal-monitoring-c4-piranha-population-count-l3a-component-counting-pipeline-on-gpu-box.svg)
 
 **Key.** Grey is deterministic code. Pink is the only place a model runs. Amber diamonds are the two routing decisions. Green marks the two choices that carry the accuracy.
 
@@ -44,7 +44,7 @@ Where the vision model runs, what is done to a frame before it gets there, and w
 
 How a biased camera, a weekly hand count and a food signal become one honest number, and when that number is allowed to raise an alert.
 
-![C4 Diagrams: Piranha Population Count — Level 3b. Component, fusing three signals into a range](../../diagrams/adr-related/animal-monitoring-c4-piranha-population-count-l3b-component-fusing-three-signals-into-a-range.svg)
+![C4 Diagrams: Piranha Population Count — Level 3b. Component, fusing three signals into a range](../../diagrams/adrs/animal-monitoring-c4-piranha-population-count-l3b-component-fusing-three-signals-into-a-range.svg)
 
 **Key.** Purple is ground truth, infrequent but authoritative. Green costs nothing extra and needs no labels. Lavender is the statistical fusion. Amber is the posterior and the confidence gate. Red bypasses all of it. Bold arrows are the observations that move the estimate most.
 

@@ -6,7 +6,7 @@
 
 ## Why this practice exists for this estate
 
-[ADR-AI-003](../adrs/platform/ADR-AI-003-production-monitoring.md) already defines the signals, the windows, the drills and the kill switch. **It does not say who gets out of bed.** This practice is the operating rhythm that gives each of those a person, a calendar and a rehearsed response, and it deliberately restates none of the mechanism.
+[ADR-AI-003](../adrs/platform/ADR-AI-003-production-monitoring.md) already defines the signals, the windows, the drills and the kill switch, but not who is actually on call when one of them fires. This practice is the operating rhythm that gives each of those a person, a calendar and a rehearsed response, and it deliberately restates none of the mechanism.
 
 ## What we do
 

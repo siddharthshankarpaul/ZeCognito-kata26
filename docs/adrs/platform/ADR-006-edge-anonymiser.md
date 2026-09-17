@@ -23,7 +23,7 @@ Accepted
 
 ## Diagram
 
-![ADR-006: Edge Anonymiser, No Faces Leave the Estate](../../diagrams/adr-related/platform-adr-006-edge-anonymiser.svg)
+![ADR-006: Edge Anonymiser, No Faces Leave the Estate](../../diagrams/adrs/platform-adr-006-edge-anonymiser.svg)
 
 | Symbol | Meaning |
 |---|---|

@@ -22,7 +22,7 @@ Accepted
 
 ## Diagram
 
-![ADR-002: Refusal of Individualised and Profiling-Based Pricing](../../diagrams/adr-related/growth-adr-002-refusal-of-individualised-pricing.svg)
+![ADR-002: Refusal of Individualised and Profiling-Based Pricing](../../diagrams/adrs/growth-adr-002-refusal-of-individualised-pricing.svg)
 
 | Symbol | Meaning |
 |---|---|

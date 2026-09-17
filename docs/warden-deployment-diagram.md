@@ -9,7 +9,7 @@ This view maps each container onto infrastructure and shows the single governed 
 
 ## Deployment diagram: C4 Level 3
 
-![The Warden Platform: Deployment Diagram — Deployment diagram: C4 Level 3](diagrams/warden-deployment.svg)
+![The Warden Platform: Deployment Diagram — Deployment diagram: C4 Level 3](diagrams/overview/warden-deployment.svg)
 
 ---
 

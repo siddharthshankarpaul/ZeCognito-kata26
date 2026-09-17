@@ -23,7 +23,7 @@ Proposed
 
 ## Diagram
 
-![ADR-004: Growth Measured by Controlled Experiments, Not Correlation](../../diagrams/adr-related/growth-adr-004-growth-measured-by-experiments.svg)
+![ADR-004: Growth Measured by Controlled Experiments, Not Correlation](../../diagrams/adrs/growth-adr-004-growth-measured-by-experiments.svg)
 
 | Symbol | Meaning |
 |---|---|

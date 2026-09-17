@@ -38,7 +38,7 @@ Wiring a provider SDK directly into each service is the fastest way to build the
 
 ## Diagram
 
-![ADR-AI-001: Provider and Model Portability Through a Single Gateway](../../diagrams/adr-related/platform-adr-ai-001-provider-and-model-portability.svg)
+![ADR-AI-001: Provider and Model Portability Through a Single Gateway](../../diagrams/adrs/platform-adr-ai-001-provider-and-model-portability.svg)
 
 | Symbol | Meaning |
 |---|---|

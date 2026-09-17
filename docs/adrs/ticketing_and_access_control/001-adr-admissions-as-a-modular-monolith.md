@@ -21,7 +21,7 @@ Accepted
 
 ## Diagram
 
-![ADR-001: Admissions as a Modular Monolith, Not Microservices](../../diagrams/adr-related/ticketing-adr-001-admissions-as-a-modular-monolith.svg)
+![ADR-001: Admissions as a Modular Monolith, Not Microservices](../../diagrams/adrs/ticketing-adr-001-admissions-as-a-modular-monolith.svg)
 
 | Symbol | Meaning |
 |---|---|

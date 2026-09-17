@@ -24,6 +24,7 @@ The brief asks for trade-off analysis, so the Alternatives and Consequences sect
 | [ADR-006](ADR-006-edge-anonymiser.md) | Identity is stripped from every camera frame at the edge, on-device, before anything is published. | Compute cost on every camera deployment, in exchange for no raw or identifiable frame ever leaving the estate. |
 | [ADR-007](ADR-007-cost-model-and-investment-strategy.md) | Push spend into one-time CapEx at the edge wherever it removes a recurring cloud bill; keep AI OpEx on one visible, tiered line through Augur. | Capital paid up front, before 3x growth shows up in revenue, in exchange for a cost structure that doesn't surprise Finance mid-month. |
 | [ADR-008](ADR-008-decision-and-audit-log.md) | Every gate decision, AI-influenced or not, writes one immutable record containing the proposal, its inputs, the policy applied and the verdict, committed with the action itself. | A write-path dependency on the gate and a seven-year retention commitment, in exchange for being able to prove what happened and who decided. |
+| [ADR-009](ADR-009-raw-and-ai-derived-data-separation.md) | Raw telemetry and every AI-derived output live in separate stores, joined by a pointer to the source event and model version. | Extra schema and storage for every derived value, in exchange for evals and audits that always grade a model against raw ground truth, never against another model's own opinion. |
 
 ### The AI layer
 
@@ -37,11 +38,12 @@ Together, [ADR-AI-002](ADR-AI-002-validation-and-verification.md) and [ADR-AI-00
 
 ## The through lines
 
-Three ideas recur across these records, and every sub-problem folder inherits them rather than re-deciding them.
+Four ideas recur across these records, and every sub-problem folder inherits them rather than re-deciding them.
 
 1. **AI can propose, never act.** [ADR-003](ADR-003-two-plane-safety-model.md) is the one rule every sub-problem's AI component is placed against, so no folder has to justify its own safety boundary from scratch.
 2. **The network is assumed unreliable, the estate keeps running anyway.** [ADR-001](ADR-001-store-and-forward-mqtt%20.md) and [ADR-002](ADR-002-offline-ticket-signing.md) both exist because patchy WiFi is a constraint every sub-problem inherits, not something each one solves independently.
 3. **A provider or a model can change without warning, and the platform has to survive it.** [ADR-AI-001](ADR-AI-001-provider-and-model-portability.md) and [ADR-AI-003](ADR-AI-003-production-monitoring.md) together answer the brief's explicit question about AI-provider uncertainty at the platform level, so every sub-problem's use of Augur inherits the same protection.
+4. **A model's output is never allowed to become the record it was computed from.** [ADR-009](ADR-009-raw-and-ai-derived-data-separation.md) is what makes [ADR-AI-002](ADR-AI-002-validation-and-verification.md)'s evals and [ADR-AI-003](ADR-AI-003-production-monitoring.md)'s monthly review possible at all: there's always an untouched raw signal underneath every AI-derived number to grade a model against.
 
 ## Open questions
 

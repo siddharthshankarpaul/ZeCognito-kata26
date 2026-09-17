@@ -24,7 +24,7 @@ Accepted
 
 ## Diagram
 
-![ADR-002: Asymmetric Cryptography for Offline-Verifiable Ticketing](../../diagrams/adr-related/platform-adr-002-offline-ticket-signing.svg)
+![ADR-002: Asymmetric Cryptography for Offline-Verifiable Ticketing](../../diagrams/adrs/platform-adr-002-offline-ticket-signing.svg)
 
 | Symbol | Meaning |
 |---|---|

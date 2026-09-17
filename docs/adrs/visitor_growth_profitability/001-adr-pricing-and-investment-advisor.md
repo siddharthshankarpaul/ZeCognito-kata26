@@ -22,7 +22,7 @@ Accepted
 
 ## Diagram
 
-![ADR-001: Hybrid ML+LLM Pricing and Investment Advisor Behind a Deterministic Gate](../../diagrams/adr-related/growth-adr-001-pricing-and-investment-advisor.svg)
+![ADR-001: Hybrid ML+LLM Pricing and Investment Advisor Behind a Deterministic Gate](../../diagrams/adrs/growth-adr-001-pricing-and-investment-advisor.svg)
 
 | Symbol | Meaning |
 |---|---|

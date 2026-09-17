@@ -22,7 +22,7 @@ Proposed
 
 ## Diagram
 
-![ADR-001: Edge First, Event Driven Architecture with the Hub as System of Record](../../diagrams/adr-related/animal-monitoring-adr-001-edge-first-event-driven-architecture.svg)
+![ADR-001: Edge First, Event Driven Architecture with the Hub as System of Record](../../diagrams/adrs/animal-monitoring-adr-001-edge-first-event-driven-architecture.svg)
 
 | Symbol | Meaning |
 |---|---|

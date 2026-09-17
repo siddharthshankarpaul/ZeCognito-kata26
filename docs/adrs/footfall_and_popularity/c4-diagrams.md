@@ -4,7 +4,7 @@
 
 ## Level 1: System Context
 
-![C4 Diagrams: Crowd & Popularity Analytics — Level 1: System Context](../../diagrams/adr-related/footfall-c4-l1-system-context.svg)
+![C4 Diagrams: Crowd & Popularity Analytics — Level 1: System Context](../../diagrams/adrs/footfall-c4-l1-system-context.svg)
 
 | Symbol | Meaning |
 |---|---|
@@ -20,7 +20,7 @@
 
 ## Level 2: Container
 
-![C4 Diagrams: Crowd & Popularity Analytics — Level 2: Container](../../diagrams/adr-related/footfall-c4-l2-container.svg)
+![C4 Diagrams: Crowd & Popularity Analytics — Level 2: Container](../../diagrams/adrs/footfall-c4-l2-container.svg)
 
 | Symbol | Meaning |
 |---|---|
@@ -39,7 +39,7 @@ The Twin container is drawn solid, matching every other Step 1 container, becaus
 
 The targeted AI-subsystem deep-dive: where exactly the LLM is called, and what it is, and isn't, allowed to do on its own.
 
-![C4 Diagrams: Crowd & Popularity Analytics — Level 3a: Component, Queue Management Agent and MCP Server](../../diagrams/adr-related/footfall-c4-l3a-component-queue-management-agent-and-mcp-server.svg)
+![C4 Diagrams: Crowd & Popularity Analytics — Level 3a: Component, Queue Management Agent and MCP Server](../../diagrams/adrs/footfall-c4-l3a-component-queue-management-agent-and-mcp-server.svg)
 
 | Symbol | Meaning |
 |---|---|
@@ -56,7 +56,7 @@ The targeted AI-subsystem deep-dive: where exactly the LLM is called, and what i
 
 The second targeted AI-subsystem deep-dive: how a raw CV model score becomes a trustworthy, per-zone confidence number, and what breaks the circularity of validating CV against the exact sensor (beam counters) it's meant to outperform.
 
-![C4 Diagrams: Crowd & Popularity Analytics — Level 3b: Component, Confidence Calibration Mechanism](../../diagrams/adr-related/footfall-c4-l3b-component-confidence-calibration.svg)
+![C4 Diagrams: Crowd & Popularity Analytics — Level 3b: Component, Confidence Calibration Mechanism](../../diagrams/adrs/footfall-c4-l3b-component-confidence-calibration.svg)
 
 | Symbol | Meaning |
 |---|---|

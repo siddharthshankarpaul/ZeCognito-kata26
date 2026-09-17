@@ -20,7 +20,7 @@ Each step's gate is the estate's own visitor-volume curve, not a calendar date.
 
 ## Diagram
 
-![ADR-002: Phased Rollout, Gated on Visitor Volume Not a Calendar Date](../../diagrams/adr-related/footfall-adr-002-phased-rollout.svg)
+![ADR-002: Phased Rollout, Gated on Visitor Volume Not a Calendar Date](../../diagrams/adrs/footfall-adr-002-phased-rollout.svg)
 
 | Symbol | Meaning |
 |---|---|

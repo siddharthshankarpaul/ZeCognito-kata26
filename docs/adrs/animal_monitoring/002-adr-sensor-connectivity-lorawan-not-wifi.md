@@ -24,7 +24,7 @@ Proposed
 
 ## Diagram
 
-![ADR-002: LoRaWAN and Power over Ethernet for Sensors, Never WiFi](../../diagrams/adr-related/animal-monitoring-adr-002-sensor-connectivity-lorawan-not-wifi.svg)
+![ADR-002: LoRaWAN and Power over Ethernet for Sensors, Never WiFi](../../diagrams/adrs/animal-monitoring-adr-002-sensor-connectivity-lorawan-not-wifi.svg)
 
 | Symbol | Meaning |
 |---|---|

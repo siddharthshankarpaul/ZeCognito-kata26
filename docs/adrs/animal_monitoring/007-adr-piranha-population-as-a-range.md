@@ -25,7 +25,7 @@ Proposed
 
 ## Diagram
 
-![ADR-007: Population Reported as a Range, Fused From Three Signals](../../diagrams/adr-related/animal-monitoring-adr-007-piranha-population-as-a-range.svg)
+![ADR-007: Population Reported as a Range, Fused From Three Signals](../../diagrams/adrs/animal-monitoring-adr-007-piranha-population-as-a-range.svg)
 
 | Symbol | Meaning |
 |---|---|

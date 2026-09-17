@@ -32,7 +32,7 @@ Proposed
 
 ## Diagram
 
-![ADR-004: Feeding and Health, Step 2. Learning Normal and Spotting Drift](../../diagrams/adr-related/animal-monitoring-adr-004-feeding-and-health-learning-normal.svg)
+![ADR-004: Feeding and Health, Step 2. Learning Normal and Spotting Drift](../../diagrams/adrs/animal-monitoring-adr-004-feeding-and-health-learning-normal.svg)
 
 | Symbol | Meaning |
 |---|---|

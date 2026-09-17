@@ -38,7 +38,7 @@ Passing an eval tells you how the system behaved on that day. Six weeks later th
 
 ## Diagram
 
-![ADR-AI-003: Production Monitoring of AI Behaviour](../../diagrams/adr-related/platform-adr-ai-003-production-monitoring.svg)
+![ADR-AI-003: Production Monitoring of AI Behaviour](../../diagrams/adrs/platform-adr-ai-003-production-monitoring.svg)
 
 | Symbol | Meaning |
 |---|---|

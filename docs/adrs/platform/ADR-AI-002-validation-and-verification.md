@@ -48,7 +48,7 @@ Only the comparative eval gate waits for volume. Guardrails work from the very f
 
 ## Diagram
 
-![ADR-AI-002: Validation and Verification of AI Outputs Through Guardrails and Evals](../../diagrams/adr-related/platform-adr-ai-002-validation-and-verification.svg)
+![ADR-AI-002: Validation and Verification of AI Outputs Through Guardrails and Evals](../../diagrams/adrs/platform-adr-ai-002-validation-and-verification.svg)
 
 | Symbol | Meaning |
 |---|---|

@@ -23,7 +23,7 @@ Accepted
 
 ## Diagram
 
-![ADR-004: Architecture Style, Service-Based Core with Event-Driven Edge and CQRS](../../diagrams/adr-related/platform-adr-004-architecture-style.svg)
+![ADR-004: Architecture Style, Service-Based Core with Event-Driven Edge and CQRS](../../diagrams/adrs/platform-adr-004-architecture-style.svg)
 
 | Symbol | Meaning |
 |---|---|

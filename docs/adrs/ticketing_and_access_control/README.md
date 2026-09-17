@@ -19,14 +19,16 @@ The cryptographic verification problem, how a turnstile trusts a ticket with no 
 | [001](001-adr-admissions-as-a-modular-monolith.md) | Admissions is a modular monolith, one deployable over one database with enforced internal module boundaries, not microservices. | A single scaling axis and module-boundary discipline to maintain, in exchange for family-pass purchases, entitlements, and refunds that are correct by construction. |
 | [002](002-adr-revocation-deny-list.md) | A deny list scoped to only today's valid passes, with two classes (hard `revoked` vs. `superseded` for upgrades), and a bounded staleness tolerance at the gate. | A small, bounded re-use window for a revoked pass, in exchange for a list that stays tiny regardless of growth and never denies someone who paid to upgrade. |
 | [003](003-adr-reentry-and-gate-connectivity.md) | Day tickets allow unlimited same-day re-entry with no consumed state, and gates get real, funded connectivity as a deliberate investment rather than best-effort WiFi. | Concurrent use of one QR code isn't software-prevented, and gate wiring is capital spend outside the general hardware budget, in exchange for stateless verification and a deny list that's normally seconds old. |
+| [004](004-adr-ticket-capacity-and-oversell-prevention.md) | Capacity-limited ticket types (a timed ride slot, a limited-seating experience) are sold online-only, enforced by one database constraint in the same transaction as the sale. | A capacity-limited product can't be sold at all during an Admissions outage, in exchange for making overselling a hard-capacity slot structurally impossible. |
 
 ## The through lines
 
-Three ideas recur across these records.
+Four ideas recur across these records.
 
 1. **Ticketing is a correctness problem at a modest scale, not a throughput problem at a huge one.** [001](001-adr-admissions-as-a-modular-monolith.md) exists because tens of admissions a second doesn't justify the coordination cost microservices would add.
 2. **Offline capability is a fallback, not the default design target, at the gate specifically.** Unlike the animal enclosures and footfall sensors that genuinely can't all be wired, [003](003-adr-reentry-and-gate-connectivity.md) treats the small, fixed set of gates as worth real investment, so full offline mode (`platform/ADR-002`) is what a gate falls back to, not how it normally runs.
 3. **A ticket's signature proves it was issued, not that it's still valid.** [002](002-adr-revocation-deny-list.md) exists specifically to close that gap, without turning the deny list into a record of every ticket ever sold.
+4. **A hard physical limit is the one place offline isn't good enough.** [004](004-adr-ticket-capacity-and-oversell-prevention.md) is the one ticketing decision that deliberately opts out of the offline voucher pool, because a capacity-limited slot needs a live, single source of truth to avoid overselling it.
 
 ## Open questions
 
@@ -34,3 +36,4 @@ Three ideas recur across these records.
 - Whether the estate's gate count is genuinely small enough for the conventional wiring [003](003-adr-reentry-and-gate-connectivity.md) assumes, this needs confirming against the actual site plan.
 - Whether any product will ever need single-entry-only day tickets, which would require revisiting the re-entry model in [003](003-adr-reentry-and-gate-connectivity.md).
 - How disputes over concurrent QR-code use at the gate are handled operationally, since [003](003-adr-reentry-and-gate-connectivity.md) leaves this to physical supervision rather than software.
+- Which specific attractions will actually need a capacity-limited SKU under [004](004-adr-ticket-capacity-and-oversell-prevention.md); none is named in the brief, so this is currently a mechanism without a confirmed first product.

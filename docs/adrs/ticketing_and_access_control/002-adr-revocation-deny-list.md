@@ -22,7 +22,7 @@ Accepted
 
 ## Diagram
 
-![ADR-002: Revocation as a Small, Time-Scoped Deny List](../../diagrams/adr-related/ticketing-adr-002-revocation-deny-list.svg)
+![ADR-002: Revocation as a Small, Time-Scoped Deny List](../../diagrams/adrs/ticketing-adr-002-revocation-deny-list.svg)
 
 | Symbol | Meaning |
 |---|---|

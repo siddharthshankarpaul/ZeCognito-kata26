@@ -8,7 +8,7 @@
 
 ## C4 Level 2 (Container)
 
-![The Warden Platform: C4 Container Diagram — C4 Level 2 (Container)](diagrams/warden-c4-container.svg)
+![The Warden Platform: C4 Container Diagram — C4 Level 2 (Container)](diagrams/overview/warden-c4-container.svg)
  
 ---
  

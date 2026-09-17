@@ -23,7 +23,7 @@
 
 ## Diagram: System View
 
-![ADR-001: Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics — System View](../../diagrams/adr-related/footfall-adr-001-crowd-and-popularity-analytics-system-view.svg)
+![ADR-001: Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics — System View](../../diagrams/adrs/footfall-adr-001-crowd-and-popularity-analytics-system-view.svg)
 
 | Symbol | Meaning |
 |---|---|
@@ -46,7 +46,7 @@
 
 ## Diagram: Decision Flow
 
-![ADR-001: Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics — Decision Flow](../../diagrams/adr-related/footfall-adr-001-crowd-and-popularity-analytics-decision-flow.svg)
+![ADR-001: Hybrid Deterministic-First Sensing with Layered AI Enrichment for Crowd & Popularity Analytics — Decision Flow](../../diagrams/adrs/footfall-adr-001-crowd-and-popularity-analytics-decision-flow.svg)
 
 | Symbol | Meaning |
 |---|---|

@@ -22,7 +22,7 @@ Accepted
 
 ## Diagram
 
-![ADR-003: The Two-Plane Safety Model, Deterministic Transactional vs Non-Deterministic Advisory](../../diagrams/adr-related/platform-adr-003-two-plane-safety-model.svg)
+![ADR-003: The Two-Plane Safety Model, Deterministic Transactional vs Non-Deterministic Advisory](../../diagrams/adrs/platform-adr-003-two-plane-safety-model.svg)
 
 | Symbol | Meaning |
 |---|---|

@@ -6,7 +6,7 @@ One pipeline, two lanes: deterministic services get a classic test pyramid; advi
 
 ## Pipeline
 
-![The Warden Platform: CI/CD Pipeline](diagrams/warden-cicd-pipeline.svg)
+![The Warden Platform: CI/CD Pipeline](diagrams/overview/warden-cicd-pipeline.svg)
 
 ---
 

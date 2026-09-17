@@ -26,7 +26,7 @@ Accepted
 
 ## Diagram
 
-![ADR-005: Edge-vs-Cloud Computer-Vision Inference Placement](../../diagrams/adr-related/platform-adr-005-edge-vs-cloud-cv-placement.svg)
+![ADR-005: Edge-vs-Cloud Computer-Vision Inference Placement](../../diagrams/adrs/platform-adr-005-edge-vs-cloud-cv-placement.svg)
 
 | Symbol | Meaning |
 |---|---|

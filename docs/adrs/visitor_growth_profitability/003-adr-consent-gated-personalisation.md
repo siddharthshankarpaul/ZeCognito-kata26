@@ -23,7 +23,7 @@ Proposed
 
 ## Diagram
 
-![ADR-003: Consent-Gated Personalisation for Repeat Visits](../../diagrams/adr-related/growth-adr-003-consent-gated-personalisation.svg)
+![ADR-003: Consent-Gated Personalisation for Repeat Visits](../../diagrams/adrs/growth-adr-003-consent-gated-personalisation.svg)
 
 | Symbol | Meaning |
 |---|---|

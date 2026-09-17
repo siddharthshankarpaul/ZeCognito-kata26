@@ -31,7 +31,7 @@ Proposed
 
 ## Diagram
 
-![ADR-005: Feeding and Health, Step 3. Alerting a Keeper and Closing the Loop](../../diagrams/adr-related/animal-monitoring-adr-005-feeding-and-health-alerting.svg)
+![ADR-005: Feeding and Health, Step 3. Alerting a Keeper and Closing the Loop](../../diagrams/adrs/animal-monitoring-adr-005-feeding-and-health-alerting.svg)
 
 | Symbol | Meaning |
 |---|---|

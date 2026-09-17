@@ -1,6 +1,6 @@
 ## Architectural "-ility"
 
-The worksheet (shown in the [README](../README.md#2-architectural--ility)) is a standard [Architecture Characteristics Worksheet](diagrams/characteristics.png) (Mark Richards / DeveloperToArchitect.com), filled in for **Von Digitalis Estates – AI-Assisted Platform (Warden)**. It has four sections: **Top 3 Driving**, the full **Driving Characteristics** list (up to 7), **Implicit Characteristics**, and **Others Considered**, and this page maps every entry on it to a concrete scenario and the architectural response that satisfies it.
+The worksheet (shown in the [README](../README.md#2-architectural--ility)) is a standard [Architecture Characteristics Worksheet](diagrams/overview/characteristics.png) (Mark Richards / DeveloperToArchitect.com), filled in for **Von Digitalis Estates – AI-Assisted Platform (Warden)**. It has four sections: **Top 3 Driving**, the full **Driving Characteristics** list (up to 7), **Implicit Characteristics**, and **Others Considered**, and this page maps every entry on it to a concrete scenario and the architectural response that satisfies it.
 
 Priority key: **H** = must hold or the submission fails · **M** = strongly desired · **L** = nice to have.
 

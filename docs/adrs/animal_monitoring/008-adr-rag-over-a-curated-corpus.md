@@ -25,7 +25,7 @@ Proposed
 
 ## Diagram
 
-![ADR-008: Retrieval Over a Curated, Provenance Tracked Corpus](../../diagrams/adr-related/animal-monitoring-adr-008-rag-over-a-curated-corpus.svg)
+![ADR-008: Retrieval Over a Curated, Provenance Tracked Corpus](../../diagrams/adrs/animal-monitoring-adr-008-rag-over-a-curated-corpus.svg)
 
 | Symbol | Meaning |
 |---|---|

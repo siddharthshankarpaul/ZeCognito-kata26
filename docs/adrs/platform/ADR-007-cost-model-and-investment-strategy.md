@@ -54,7 +54,7 @@ Proposed
 
 ## Diagram
 
-![ADR-007: Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx](../../diagrams/adr-related/platform-adr-007-cost-model-and-investment-strategy.svg)
+![ADR-007: Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx](../../diagrams/adrs/platform-adr-007-cost-model-and-investment-strategy.svg)
 
 | Symbol | Meaning |
 |---|---|
