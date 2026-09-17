@@ -72,7 +72,7 @@ Proposed
 | Staffing is a guess; popular zones queue, quiet zones sit overstaffed | Occupancy and forecast give ops a number to staff against | [footfall_and_popularity/001](../footfall_and_popularity/001-adr-crowd-and-popularity-analytics.md) |
 | One flat price, no read on what's actually driving repeat visits | A Pricing Advisor proposes, a human approves, and the effect gets measured, not assumed | [visitor_growth_profitability/001](../visitor_growth_profitability/001-adr-pricing-and-investment-advisor.md) |
 
-None of these have a brief-stated dollar figure attached, see [README §14 Assumptions](../../../README.md#14-assumptions). This ADR doesn't invent one. The case for the investment is the failure modes it closes, not a projected saving nobody could audit.
+None of these have a brief-stated dollar figure attached, see [README §16 Assumptions](../../../README.md#16-assumptions). This ADR doesn't invent one. The case for the investment is the failure modes it closes, not a projected saving nobody could audit.
 
 ## Alternatives Considered
 
@@ -89,7 +89,7 @@ None of these have a brief-stated dollar figure attached, see [README §14 Assum
 | Tradeoff | Mitigation |
 |---|---|
 | CapEx is paid before any revenue from the 3x growth target shows up | Sized to today's 55 enclosures + 40 rides, not the 15,000/day target, so it doesn't front-load spend the estate doesn't need yet. |
-| Illustrative unit costs will be wrong once real quotes come in | The structure, what's CapEx vs OpEx, what recurs with volume, is the durable decision; [README §14](../../../README.md#14-assumptions) already flags these as estimates. |
+| Illustrative unit costs will be wrong once real quotes come in | The structure, what's CapEx vs OpEx, what recurs with volume, is the durable decision; [README §16](../../../README.md#16-assumptions) already flags these as estimates. |
 | Labour cost, annotation and calibration, has no natural ceiling as coverage grows | Tracked as its own line so it can't hide inside a shrinking compute bill and get missed. |
 | A cost ADR this explicit invites scrutiny down to the line item | That's the point; it's easier to defend one line item than an unexamined total. |
 

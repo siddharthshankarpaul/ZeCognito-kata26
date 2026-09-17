@@ -22,17 +22,19 @@ A newly-appointed Countess, a patchy WiFi signal, and 200+ animals, waiting for 
 | 1 | [Problem Background](#1-problem-background) | Who the Countess is, and what she's asking for |
 | 2 | [Architectural "-ility"](#2-architectural--ility) | What must never break, and what answers it |
 | 3 | [Solution Background](#3-solution-background) | The Warden Platform, its named parts, and the two-plane model |
-| 4 | [Master architecture view](#4-master-architecture-view-c4-container) | The whole estate, drawn as one system |
-| 5 | [The sub-problems](#5-the-sub-problems) | Ticketing, footfall, animal welfare, growth, each with its own AI |
-| 6 | [AI as a load-bearing concern](#6-ai-as-a-load-bearing-concern) | Where AI does real work |
-| 7 | [Validation & verification](#7-validation--verification-of-non-deterministic-ai) | How we know the AI hasn't quietly gone wrong |
-| 8 | [Dealing with uncertainty in AI](#8-dealing-with-uncertainty-in-ai-answering-the-brief-directly) | Provider churn, price hikes, shutdowns |
-| 9 | [Compliance, privacy & ethics](#9-compliance-privacy--ethics) | What we refuse to build, and why |
-| 10 | [Architecture Decision Records](#10-architecture-decision-records-decision-log) | The full decision log |
-| 11 | [Deployment view](#11-deployment-view) | Edge, core and cloud, and what runs where |
-| 12 | [CI/CD](#12-cicd) | The deployment pipeline |
-| 13 | [Traceability matrix](#13-traceability-matrix-brief--criterion--where-its-answered) | Every brief requirement, and where it's answered |
-| 14 | [Assumptions](#14-assumptions) | What we took on faith, and how to check it |
+| 4 | [High-level design](#4-high-level-design) | The whole platform on one page, with principles and outcomes |
+| 5 | [Master architecture view](#5-master-architecture-view-c4-container) | The whole estate, drawn as one system |
+| 6 | [The sub-problems](#6-the-sub-problems) | Ticketing, footfall, animal welfare, growth, each with its own AI |
+| 7 | [AI as a load-bearing concern](#7-ai-as-a-load-bearing-concern) | Where AI does real work |
+| 8 | [Validation & verification](#8-validation--verification-of-non-deterministic-ai) | How we know the AI hasn't quietly gone wrong |
+| 9 | [Dealing with uncertainty in AI](#9-dealing-with-uncertainty-in-ai-answering-the-brief-directly) | Provider churn, price hikes, shutdowns |
+| 10 | [Compliance, privacy & ethics](#10-compliance-privacy--ethics) | What we refuse to build, and why |
+| 11 | [Architecture Decision Records](#11-architecture-decision-records-decision-log) | The full decision log |
+| 12 | [Deployment view](#12-deployment-view) | Edge, core and cloud, and what runs where |
+| 13 | [CI/CD](#13-cicd) | The deployment pipeline |
+| 14 | [Engineering practices](#14-engineering-practices) | How we build and run it, across every decision |
+| 15 | [Traceability matrix](#15-traceability-matrix-brief--criterion--where-its-answered) | Every brief requirement, and where it's answered |
+| 16 | [Assumptions](#16-assumptions) | What we took on faith, and how to check it |
 
 ---
 
@@ -81,14 +83,22 @@ Her full ask, as we distilled it from the brief:
 | **Decision & Audit Log** | Immutable record of every gate decision and its inputs | Transactional | Estate core |
 
 #### 3.3 Principles we hold throughout
-- **AI is load-bearing, not decorative**: every sub-problem has a substantive AI element (§5, §6).
+- **AI is load-bearing, not decorative**: every sub-problem has a substantive AI element (§6, §7).
 - **"Why not" is documented as carefully as "why"**: individualised pricing, for example, is explicitly refused with regulatory grounding ([docs/adrs/visitor_growth_profitability/002](docs/adrs/visitor_growth_profitability/002-adr-refusal-of-individualised-pricing.md)).
 - **We cite techniques, not products**: commercial SaaS appears only inside build-vs-buy ADRs as due-diligence evidence.
 - **Humans stay in the loop**: wherever the stakes are real, vet dispatch, price changes, investment.
 
 ---
 
-## 4. Master architecture view (C4 Container)
+## 4. High-level design
+
+The whole platform on one page: every actor, the on-estate edge, both planes with the single governed bridge between them, the external systems, and the cross-cutting concerns. Every arrow here is an edge of the C4 container diagram in [§5](#5-master-architecture-view-c4-container); this view adds the principles, patterns, resilience posture and outcomes around it.
+
+![The Warden Platform high-level design: actors and touchpoints feed a deterministic transactional plane; the on-estate edge streams anonymised telemetry over MQTT into an advisory AI plane whose proposals cross a single deterministic decision gate before becoming audited actions; an eval harness verifies every model; external providers are reached only through Augur](docs/diagrams/warden-hld.svg)
+
+---
+
+## 5. Master architecture view (C4 Container)
 
 ![Master architecture view: the whole estate as one system, transactional plane, advisory plane, and the deterministic decision gate between them](docs/diagrams/master-architecture.svg)
 
@@ -107,13 +117,13 @@ This is the summary view. For the full C4 Level 2 container diagram, every conta
 
 ---
 
-## 5. The sub-problems
+## 6. The sub-problems
 
 Each sub-problem below gives the context, a **targeted view**, a **2–3 line solution**, the **AI role**, and links to the governing ADRs.
 
 ---
 
-### 5.1 Ticketing, family passes & access control
+### 6.1 Ticketing, family passes & access control
 
 ![Ticketing, family passes, and access control flow](docs/diagrams/ticketing.svg)
 
@@ -123,7 +133,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ---
 
-### 5.2 Footfall & popularity analytics
+### 6.2 Footfall & popularity analytics
 
 ![Footfall and popularity analytics flow](docs/diagrams/footfall.svg)
 
@@ -133,7 +143,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ---
 
-### 5.3 Animal welfare & piranha census (Ark)
+### 6.3 Animal welfare & piranha census (Ark)
 ![Animal welfare and piranha census (Ark) flow](docs/diagrams/animal-welfare.svg)
 
 **Solution (2–3 lines):** Across the **55 enclosures**, feed/water sensors and **Lookout CV** feed **Ark**, which runs welfare-anomaly models and for the jumping piranha, a **population-estimation** model that flags **count drift** (predation, breeding, escape). Alerts become **deterministic work orders** (vet dispatch, restock) only via the gate; **keepers confirm or correct**, feeding the eval loop.
@@ -142,7 +152,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ---
 
-### 5.4 Visitor growth & profitability
+### 6.4 Visitor growth & profitability
 
 ![Visitor growth and profitability flow](docs/diagrams/growth-profitability.svg)
 
@@ -152,7 +162,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 
 ---
 
-## 6. AI as a load-bearing concern
+## 7. AI as a load-bearing concern
 
 | AI element | Sub-problem | What it does | Why it's load-bearing |
 |---|---|---|---|
@@ -163,7 +173,7 @@ Each sub-problem below gives the context, a **targeted view**, a **2–3 line so
 | **Guide** | 1, all | GenAI concierge | Improves the visitor experience and conversion |
 | **Augur** | all | Provider-agnostic LLM gateway | Makes every LLM use survivable and affordable |
 
-### 6.1 Augur: provider-agnostic LLM gateway (resilience zoom-in)
+### 7.1 Augur: provider-agnostic LLM gateway (resilience zoom-in)
 
 ![Augur provider-agnostic LLM gateway resilience zoom-in](docs/diagrams/augur-resilience.svg)
 
@@ -171,7 +181,7 @@ Augur is the single choke-point through which **every** LLM call passes. It give
 
 ---
 
-## 7. Validation & verification of non-deterministic AI
+## 8. Validation & verification of non-deterministic AI
 
 Deterministic code is tested the classic way. The **Advisory plane is verified continuously** by the **Eval & V&V Harness**:
 
@@ -185,7 +195,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 
 ---
 
-## 8. Dealing with uncertainty in AI (answering the brief directly)
+## 9. Dealing with uncertainty in AI (answering the brief directly)
 
 | Brief question | Our answer |
 |---|---|
@@ -196,7 +206,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 
 ---
 
-## 9. Compliance, privacy & ethics
+## 10. Compliance, privacy & ethics
 
 - **Edge Anonymiser** identity is stripped **at the edge**; no faces or raw identifiable frames ever leave the estate ([docs/adrs/platform/ADR-006](docs/adrs/platform/ADR-006-edge-anonymiser.md)).
 - **Visitor Identity & Consent**: explicit consent captured and honoured in the transactional plane, and it's the same consent record return-visit personalisation checks before every use ([docs/adrs/visitor_growth_profitability/003](docs/adrs/visitor_growth_profitability/003-adr-consent-gated-personalisation.md)).
@@ -205,7 +215,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 
 ---
 
-## 10. Architecture Decision Records (decision log)
+## 11. Architecture Decision Records (decision log)
 
 
 **Platform: architecture**
@@ -219,6 +229,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 | **ADR-005** | Edge-vs-Cloud Computer-Vision Inference Placement | Accepted | Latency/privacy/cost-sensitive CV (counting, safety) runs at the edge on Lookout; heavier/batch analysis runs in cloud. Anonymised data only leaves the estate. | [docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md](docs/adrs/platform/ADR-005-edge-vs-cloud-cv-placement.md) |
 | **ADR-006** | Edge Anonymiser, No Faces Leave the Estate | Accepted | Identity stripped at the edge before any event is published; privacy-by-design for footfall and welfare CV. EU AI Act aligned. | [docs/adrs/platform/ADR-006-edge-anonymiser.md](docs/adrs/platform/ADR-006-edge-anonymiser.md) |
 | **ADR-007** | Cost Model and Investment Strategy, Edge CapEx to Hold Down Cloud OpEx | Proposed | Illustrative CapEx/OpEx breakdown for the edge hardware and AI OpEx above; pushes spend into one-time capital at the edge and keeps LLM gateway spend on one visible line. | [docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md](docs/adrs/platform/ADR-007-cost-model-and-investment-strategy.md) |
+| **ADR-008** | The Decision and Audit Log, One Immutable Record of Every Gate Decision | Proposed | Every gate decision, AI-influenced or not, writes one append-only record with the proposal, its inputs, the policy version and the verdict, committed with the action. Works offline at the turnstile and reconciles later; keeps pseudonyms so erasure and a seven-year record can coexist. | [docs/adrs/platform/ADR-008-decision-and-audit-log.md](docs/adrs/platform/ADR-008-decision-and-audit-log.md) |
 
 **Platform: the AI layer**
 
@@ -268,7 +279,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 
 ---
 
-## 11. Deployment view
+## 12. Deployment view
 
 **Topology (three tiers):**
 
@@ -282,7 +293,7 @@ Deterministic code is tested the classic way. The **Advisory plane is verified c
 
 ---
 
-## 12. CI/CD
+## 13. CI/CD
 
 One pipeline, two lanes: deterministic services get a classic test pyramid, while advisory/AI changes must clear a golden-dataset eval gate and shadow/canary with human sign-off before they can influence the Decision Gate. Architecture fitness functions fail the build if the two-plane separation is ever violated.
 
@@ -290,27 +301,64 @@ One pipeline, two lanes: deterministic services get a classic test pyramid, whil
 
 ---
 
-## 13. Traceability matrix (brief → criterion → where it's answered)
+## 14. Engineering Practices
+
+The ADRs record *what we decided and why*. These record *how we build and run it*: the practices that cut across every decision rather than sitting inside one. Each names the ADRs it operationalises, carries a measurable signal for whether it's actually working, and states what we deliberately **don't** do.
+
+**Building the platform**
+
+| Practice | What it covers |
+|---|---|
+| [Agentic Development Lifecycle (ADLC)](docs/engineering-practices/agentic-development-lifecycle.md) | Agents build features in tandem, with persona agents standing in for scarce keeper and vet time. A deterministic gate decides what merges without a human, mirroring the two-plane model it builds. |
+| [Offline-First Engineering](docs/engineering-practices/offline-first-engineering.md) | The network being down is the normal case, not the error case. Idempotent consumers, buffering at every hop, visible degradation, and a quarterly disconnected-shift drill. |
+
+**Running the AI**
+
+| Practice | What it covers |
+|---|---|
+| [MLOps](docs/engineering-practices/mlops.md) | The lifecycle around the eval gate: artefact registry and ownership, golden-set curation, triggered rather than scheduled retraining, and how a CV model reaches a GPU box in an animal house. |
+| [AIOps](docs/engineering-practices/aiops.md) | Who gets out of bed. One platform-wide rota, published kill-switch authority, a drill calendar booked at quarter start, and incidents classified on blast radius. |
+
+**Operating the estate**
+
+| Practice | What it covers |
+|---|---|
+| [Edge Fleet and Device Lifecycle](docs/engineering-practices/edge-fleet-and-device-lifecycle.md) | ~300 devices across 55 enclosures on two transports that don't share a firmware path. Enrolment, calibration debt as a funded number, batched maintenance rounds, and why battery-sensor firmware is close to immutable. |
+| [Observability and Audit](docs/engineering-practices/observability-and-audit.md) | Both planes, including the money path that has no AI in it. One correlation ID across the gate seam, three never-merged surfaces, and a quarterly replay drill that fails if anyone consults the live system. |
+| [Privacy, Compliance and Data Governance](docs/engineering-practices/privacy-compliance-and-data-governance.md) | The EU AI Act and Digital Fairness Act surface in one place: anonymise before egress, consent checked per use, tiered retention, and the refusals we made deliberately. |
+| [FinOps and Cost Engineering](docs/engineering-practices/finops-and-cost-engineering.md) | Four cost lines with four owners, unit economics that must not grow with visitor volume, and the finding worth defending: the largest recurring cost is keeper and vet labour, not compute. |
+
+**Considered, not adopted**
+
+| Practice | What it covers |
+|---|---|
+| [Graph Engineering](docs/engineering-practices/graph-engineering-considered.md) | Evaluated for the husbandry corpus, estate topology and crowd flow, and set aside in each case. Recorded with the specific conditions that would change our mind. |
+
+**CI/CD** is covered as its own section at [§13](#13-cicd), with the full two-lane pipeline in [docs/warden-cicd-pipeline.md](docs/warden-cicd-pipeline.md).
+
+---
+
+## 15. Traceability matrix (brief → criterion → where it's answered)
 
 | Brief requirement | Judging criterion | Where answered |
 |---|---|---|
-| Buy tickets + family passes + access | Suitability; characteristics fit | §5.1 |
-| Understand park popularity | Innovative AI use; appropriate detail | §5.2 |
-| Track animal health/eating + piranha population | Innovative AI use; V&V | §5.3 |
-| Grow visitors + profitability | Innovative AI use; suitability | §5.4 |
-| Patchy WiFi / offline | Suitability under constraints | §2, §5.1, §11 |
-| Estate → cloud data movement | Suitability | §4, §11 |
-| MQTT hardware budget | Suitability; cost | §4, §10, §11 |
-| **Dealing with AI-provider uncertainty** | Uncertainty in AI | §6.1, §8 |
+| Buy tickets + family passes + access | Suitability; characteristics fit | §6.1 |
+| Understand park popularity | Innovative AI use; appropriate detail | §6.2 |
+| Track animal health/eating + piranha population | Innovative AI use; V&V | §6.3 |
+| Grow visitors + profitability | Innovative AI use; suitability | §6.4 |
+| Patchy WiFi / offline | Suitability under constraints | §2, §6.1, §12 |
+| Estate → cloud data movement | Suitability | §5, §12 |
+| MQTT hardware budget | Suitability; cost | §5, §11, §12 |
+| **Dealing with AI-provider uncertainty** | Uncertainty in AI | §7.1, §9 |
 | **Do additions match existing characteristics?** | Characteristics fit | §3.1, §2 |
-| **Validation of non-deterministic AI results** | Validation & verification | §7 |
-| Fair, compliant pricing | Suitability; ethics | §5.4, §9 |
-| Clear, keyed diagrams | Communication | §4 legend + all diagrams |
+| **Validation of non-deterministic AI results** | Validation & verification | §8 |
+| Fair, compliant pricing | Suitability; ethics | §6.4, §10 |
+| Clear, keyed diagrams | Communication | §5 legend + all diagrams |
 
 
 ---
 
-## 14. Assumptions
+## 16. Assumptions
 
 | Assumption | Source | How to validate |
 |---|---|---|
@@ -320,6 +368,6 @@ One pipeline, two lanes: deterministic services get a classic test pyramid, whil
 | The footfall "chokepoint" counting assumption may not hold in open plazas or festival grounds | [footfall_and_popularity](docs/adrs/footfall_and_popularity) | Field-validate counter placement once beam/IR hardware is installed. |
 | Piranha tank service frequency (how often real ground truth exists) is unknown | [animal_monitoring](docs/adrs/animal_monitoring) | Confirm with keepers before finalising the calibration cadence. |
 | Whether the estate will fund calibration labour, and whether a vet will help label footage, are both open | [animal_monitoring](docs/adrs/animal_monitoring) | Needs a Countess/Finance decision before Wave 2 hardware is purchased. |
-| A visitor-facing app/PWA is assumed as the ticket-purchase and Guide-concierge delivery channel | §3.2, §4 | Confirm this matches the estate's actual visitor-facing channel strategy; the brief doesn't mandate one. |
+| A visitor-facing app/PWA is assumed as the ticket-purchase and Guide-concierge delivery channel | §3.2, §5 | Confirm this matches the estate's actual visitor-facing channel strategy; the brief doesn't mandate one. |
 
 
